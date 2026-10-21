@@ -107,3 +107,14 @@ klinik soru yanıtlayan ajan (Haiku).
 | Nasıl fark edildi | GitHub Actions matrisi (Linux/Windows × Python 3.10/3.13): 4 işten 3'ü `test_R18_engine_n_is_minimal_multiple[V52]`'de kırıldı; aynı test Python 3.10 ile yerelde yeniden üretildi. |
 | Yakalayan | `.github/workflows/test.yml` · `tests/test_r18_high_precision.py` |
 | Düzeltme | Test ikiye ayrıldı: df2 ≲ 2,4·10⁸ (V51, V53, V54) her platformda katı; V52/V55 yalnızca ölçülüyor (`xfail`, katı değil, sebep scipy sürümüyle yazılıyor). R-18 belgesine ortam tablosu eklendi, README ve site metni "scipy 1.18 ile" diye düzeltildi. Ders: tek makinede geçen sayısal bir iddia, ortam değişince çürüyebilir; CI matrisi bunun için var. |
+
+## H-10 · "Komut dosyaları python.exe'nin yanındadır" — tek kurulum düzeninden genelleme (O2)
+
+| Alan | |
+|------|---|
+| Oturum | O2 (temiz oda) — `tests/test_cli.py::test_installed_console_scripts_exist` |
+| Ajanın iddiası | `gpower-clone` ve `gpower-clone-mcp`, `Path(sys.executable).parent` klasöründedir. |
+| Gerçek davranış | Bu yalnızca sanal ortamda (ve Linux'ta) doğru. Windows'ta sanal ortamsız kurulumda komut dosyaları `<önek>\Scripts\` altındadır. O2 testi kendi `.venv`'inde yazıp geçirdiği için fark etmedi. |
+| Nasıl fark edildi | GitHub Actions'ta Windows işleri (Python 3.10 ve 3.13) kırıldı; loglar oturumdan okunamadığı için CI, başarısız testleri ve platform/scipy sürümünü açıklama (annotation) olarak yazacak şekilde değiştirildi. |
+| Yakalayan | `.github/workflows/test.yml` (Windows × 2) |
+| Düzeltme | Klasör `sysconfig.get_path("scripts")` ile bulunuyor; 4 işin 4'ü yeşil. |

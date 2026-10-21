@@ -33,7 +33,7 @@ kendisi değildir, onun kodunu içermez ve onun adını taşımaz.
 | Bilinen sapma | V52, V54, V55, V56 (f ≤ 0,0002, df2 ≳ 2·10⁸) — G*Power'ın N'i bu vektörlerde **minimum değil** (V54'te hedefin altında); 40 basamaklı bağımsız hesapla kanıtlandı. Motor scipy 1.18'de hepsinde doğru, eski scipy'de df2 ≈ 10⁹'da o da kayıyor (H-09) → [`oracle/R18_YUKSEK_HASSASIYET.md`](oracle/R18_YUKSEK_HASSASIYET.md) |
 | Kütüphane oracle | statsmodels, **1485 / 1485** (a priori N birebir, post hoc \|Δgüç\| < 1e-6) |
 | Hata/uyarı metinleri | 12 / 12 hata kutusu, 4 / 4 "Please note" uyarısı birebir |
-| Test paketi | **1768 test**: 1764 geçti, 4 `xfail(strict)` (bilinen sapma) · Windows + Linux, Python 3.10 ve 3.13'te CI (CI matrisi H-09'u yakaladı) |
+| Test paketi | **1768 test**: 1764 geçti, 4 `xfail(strict)` (bilinen sapma) · Windows + Linux, Python 3.10 ve 3.13'te CI — matris iki gerçek hatayı yakaladı (H-09, H-10) |
 | Özellik tabanlı test | 8 değişmez (metamorfik ilişki), derin koşuda **16 000 rastgele girdi** — [`tests/test_properties.py`](tests/test_properties.py) |
 | Mutasyon testi | **25 / 26 mutant öldürüldü** (%96, yaşayan tek mutant eşdeğer); ilk kampanya **2 gerçek test açığı** buldu, kapatıldı — [`MUTATION.md`](MUTATION.md) |
 | Canlı demo | GitHub Pages + Pyodide: **depodaki motorun kendisi** tarayıcıda; 63 vektörü diferansiyel testin aynı koduyla tarayıcıda yeniden doğrular |
@@ -143,7 +143,7 @@ flowchart LR
 |-------|--------|
 | [`SPEC.md`](SPEC.md) | 18 kural (R-01…R-18) + Gherkin kabul kriterleri + bilinmeyenler |
 | [`LEDGER.md`](LEDGER.md) | Kanıt defteri: iddia · REA kanıtı (fonksiyon/adres) · güven · bilinmeyen · SPEC · test |
-| [`HALLUCINATIONS.md`](HALLUCINATIONS.md) | 9 kayıt: ajanların yanlış çıkardıkları, nasıl fark edildi, hangi test yakaladı |
+| [`HALLUCINATIONS.md`](HALLUCINATIONS.md) | 10 kayıt: ajanların yanlış çıkardıkları, nasıl fark edildi, hangi test yakaladı |
 | [`AGENT_COST.md`](AGENT_COST.md) | Oturum başına ölçülmüş token, süre, liste maliyeti, kota |
 | [`MUTATION.md`](MUTATION.md) | Mutasyon testi: 26 mutant, hangi testin yakaladığı, bulunan iki test açığı |
 | [`tools/`](tools/) | `mutasyon.py` (mutasyon kampanyası), `build_site.py` (canlı demoyu üretir) |
