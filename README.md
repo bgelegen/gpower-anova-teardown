@@ -10,6 +10,13 @@ kendisi değildir, onun kodunu içermez ve onun adını taşımaz.
 
 **Yazar:** Batuhan Gelegen ([@bgelegen](https://github.com/bgelegen))
 
+[![testler](https://github.com/bgelegen/gpower-anova-teardown/actions/workflows/test.yml/badge.svg)](https://github.com/bgelegen/gpower-anova-teardown/actions/workflows/test.yml)
+
+**▶ [Canlı demo](https://bgelegen.github.io/gpower-anova-teardown/)** — aynı Python motoru tarayıcınızda çalışır, 63 G*Power penceresiyle yan yana ·
+[60 sn CLI demosu](docs/demo-cli.mp4) · [Tanıtım videosu](docs/tanitim.mp4)
+
+[![Canlı demo: hesaplayıcı ve F dağılımları](docs/img/canli-demo.png)](https://bgelegen.github.io/gpower-anova-teardown/)
+
 > **Atıf.** G*Power: Faul, F., Erdfelder, E., Lang, A.-G., & Buchner, A. (2007). G*Power 3: A
 > flexible statistical power analysis program for the social, behavioral, and biomedical
 > sciences. *Behavior Research Methods, 39*(2), 175–191. · Faul, F., Erdfelder, E., Buchner, A.,
@@ -26,7 +33,10 @@ kendisi değildir, onun kodunu içermez ve onun adını taşımaz.
 | Bilinen sapma | V52, V54, V55, V56 (f ≤ 0,0002, df2 ≳ 2·10⁸) — **motorun doğru, G*Power'ın yanlış olduğu** 40 basamaklı bağımsız hesapla kanıtlandı → [`oracle/R18_YUKSEK_HASSASIYET.md`](oracle/R18_YUKSEK_HASSASIYET.md) |
 | Kütüphane oracle | statsmodels, **1485 / 1485** (a priori N birebir, post hoc \|Δgüç\| < 1e-6) |
 | Hata/uyarı metinleri | 12 / 12 hata kutusu, 4 / 4 "Please note" uyarısı birebir |
-| Test paketi | **1750 test**: 1746 geçti, 4 `xfail(strict)` (bilinen sapma) |
+| Test paketi | **1767 test**: 1763 geçti, 4 `xfail(strict)` (bilinen sapma) · Windows + Linux, Python 3.10 ve 3.13'te CI |
+| Özellik tabanlı test | 8 değişmez (metamorfik ilişki), derin koşuda **16 000 rastgele girdi** — [`tests/test_properties.py`](tests/test_properties.py) |
+| Mutasyon testi | **25 / 26 mutant öldürüldü** (%96, yaşayan tek mutant eşdeğer); ilk kampanya **2 gerçek test açığı** buldu, kapatıldı — [`MUTATION.md`](MUTATION.md) |
+| Canlı demo | GitHub Pages + Pyodide: **depodaki motorun kendisi** tarayıcıda; 63 vektörü diferansiyel testin aynı koduyla tarayıcıda yeniden doğrular |
 | Kanıt defteri | 54 satır: **23 [REA]** (kılavuzda olmayan davranış), 6 [REA→DOK] puan dışı, 7 [DOK], 18 [ORACLE]/[AJAN] |
 | MCP (+15) | tek araç `anova_oneway`; 51 girdide MCP nesnesi = CLI JSON'u |
 | AI ajanı (+10) | 10 Türkçe klinik soru; son sürüm iki koşuda **19/20**, 20 yanıtta kaynaksız sayı yok; MCP–GUI token ölçümü |
@@ -89,15 +99,29 @@ gpower-clone --test anova-oneway --mode a-priori --f 0.25 --alpha 0.05 --power 0
   yaygın takma adlar (`--k`, `--n`, `--effect-size`, `apriori`, …) zaten kabul edilir.
 
 ```bash
-pytest -q                       # 1750 test (~2 dk); oracle dosyaları yoksa diferansiyel testler atlanır
+pytest -q                       # 1767 test (~2 dk); oracle dosyaları yoksa diferansiyel testler atlanır
 ```
 
 ## Temiz oda akışı
 
-```
-O1 · söküm   (Opus + REA + Ghidra)  ──▶ SPEC.md + LEDGER.md      prompts/oturum1-sokum.md, oturum1-devam.md
-                     │ yalnızca SPEC.md + CONTRACT.md (SHA-256 8b9ef5a8…4b4af2)
-O2 · yazım   (Sonnet, REA YOK)      ──▶ src/ + tests/            prompts/oturum2-yazim.md
+```mermaid
+flowchart LR
+  GP["G*Power 3.1.9.7<br/>GPowerNT.exe<br/>SHA-256 c63e6a13…"]
+  subgraph O1["Oturum 1 · söküm (Opus + REA + Ghidra)"]
+    REA["decompile · xref · dizgiler<br/>(repo dışında)"]
+  end
+  GUI["G*Power penceresi<br/>63 oracle vektörü"]
+  SPEC["SPEC.md · 18 kural + Gherkin<br/>LEDGER.md · 54 kanıt satırı"]
+  subgraph O2["Oturum 2 · temiz oda (Sonnet, MCP yok)"]
+    CODE["engine.py · display.py<br/>cli.py · mcp_server.py"]
+  end
+  TEST["Diferansiyel test<br/>63 GUI + 1485 statsmodels<br/>özellik · mutasyon · R-18 kanıtı"]
+  GP --> REA --> SPEC
+  GP --> GUI --> SPEC
+  SPEC -- "yalnızca SPEC + CONTRACT<br/>SHA-256 8b9ef5a8…" --> CODE
+  CODE --> TEST
+  GUI --> TEST
+  CODE --> WEB["CLI · MCP · canlı web demosu<br/>(aynı motor)"]
 ```
 
 - O2, repo dışında yalnızca `SPEC.md`, `CONTRACT.md` ve boş MCP yapılandırması içeren bir
@@ -121,13 +145,15 @@ O2 · yazım   (Sonnet, REA YOK)      ──▶ src/ + tests/            prompts
 | [`LEDGER.md`](LEDGER.md) | Kanıt defteri: iddia · REA kanıtı (fonksiyon/adres) · güven · bilinmeyen · SPEC · test |
 | [`HALLUCINATIONS.md`](HALLUCINATIONS.md) | 8 kayıt: ajanların yanlış çıkardıkları, nasıl fark edildi, hangi test yakaladı |
 | [`AGENT_COST.md`](AGENT_COST.md) | Oturum başına ölçülmüş token, süre, liste maliyeti, kota |
+| [`MUTATION.md`](MUTATION.md) | Mutasyon testi: 26 mutant, hangi testin yakaladığı, bulunan iki test açığı |
+| [`tools/`](tools/) | `mutasyon.py` (mutasyon kampanyası), `build_site.py` (canlı demoyu üretir) |
 | [`SPEC_SORULARI.md`](SPEC_SORULARI.md) | O2'nin SPEC'te belirsiz bulduğu 13 nokta ve kararları |
 | [`prompts/`](prompts/) | O1 ve O2'nin ilk prompt'ları (birebir) + O1 devam mesajı |
 | [`oracle/`](oracle/) | 63 G*Power vektörü (CSV + ekran görüntüsü), 1485 statsmodels vektörü, R-18 kanıtı |
 | [`src/gpower_clone/`](src/gpower_clone/) | `engine.py` (saf hesap) · `display.py` (G*Power gösterimi) · `contract.py` · `cli.py` · `mcp_server.py` |
 | [`tests/`](tests/) | kural testleri (her R-xx ve Gherkin senaryosu), CLI, diferansiyel, MCP=CLI, R-18 |
 | [`eval/`](eval/) | AI ajanı: 10 soru, araç çağrısı logları, sonuçlar, token karşılaştırması ([`eval/OZET.md`](eval/OZET.md)) |
-| [`docs/`](docs/) | Demo videosu, terminal kaydı (`.cast`) ve betiği, MCP şeması |
+| [`docs/`](docs/) | Canlı demo sitesi (GitHub Pages), videolar, terminal kaydı ve betiği, MCP şeması |
 
 ## Bulunan, kılavuzda olmayan davranışlar (öne çıkanlar)
 
@@ -141,6 +167,21 @@ O2 · yazım   (Sonnet, REA YOK)      ──▶ src/ + tests/            prompts
 | Kesirli k ve N sessizce yarım-yukarı yuvarlanır (2,5 → 3, 1,4 → 1 → hata) | L-35 [REA] · V45, V46, V58–V60 |
 | Gösterim: 0,01 < \|x\| < 100 → `%.7f`, aksi `%.7g`; tamsayılar ≥ 10¹² → `%.5g` | L-25, L-26 [REA] · V23, V39, V47, V48, V56, V61, V62 |
 | Uç küçük f'de G*Power'ın merkezi olmayan F hesabı kayar; V54'te gösterilen N hedef gücü **sağlamıyor** | L-37 [REA], L-47, L-48 · V52, V54–V56 |
+
+## Canlı demo
+
+**https://bgelegen.github.io/gpower-anova-teardown/** — tek sayfa, kurulum gerektirmez.
+
+- **Hesaplayıcı:** `src/gpower_clone/` paketinin kendisi [Pyodide](https://pyodide.org) (tarayıcıda
+  CPython + scipy) ile çalışır; CLI ve MCP'den sonra üçüncü ince adaptördür. Sonuçlar G*Power
+  penceresindeki gibi 7 haneyle, F dağılımları G*Power'ın renkleriyle çizilir; altında aynı girdinin
+  CLI komutu ve JSON çıktısı görünür.
+- **G*Power ile yan yana:** 63 vektör, süzgeçler (hata, uyarı, bilinen sapma), satıra tıklayınca
+  G*Power penceresinin ekran görüntüsü ve alan alan karşılaştırma.
+- **Tarayıcıda yeniden doğrula:** diferansiyel testin **aynı** karşılaştırma kodu (`tests/helpers.py`)
+  63 vektörü tarayıcıda yeniden koşar.
+- Senkron güvencesi: `tests/test_site_sync.py`, `docs/py/` altındaki dosyaların `src/` ile birebir
+  aynı olduğunu denetler; site `python tools/build_site.py` ile üretilir.
 
 ## MCP sunucusu (+15)
 

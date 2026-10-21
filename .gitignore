@@ -51,3 +51,4 @@ secrets.*
 
 # yerel yapılandırma (agent_eval.py üretir)
 eval/agent-mcp.json
+.hypothesis/

@@ -11,7 +11,7 @@ dependencies = ["scipy"]
 
 [project.optional-dependencies]
 mcp = ["mcp"]
-test = ["pytest", "mcp", "mpmath"]
+test = ["pytest", "mcp", "mpmath", "hypothesis"]
 
 [project.scripts]
 gpower-clone = "gpower_clone.cli:main"

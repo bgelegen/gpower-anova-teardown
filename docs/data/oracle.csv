@@ -1,0 +1,64 @@
+id,mode,f,alpha,power,groups,n_total,sinif,neden,gp_n_total,gp_actual_power,gp_critical,gp_df1,gp_df2,gp_ncp,gp_mesaj,ekran_goruntusu
+V01,a-priori,0.1,0.05,0.8,3,,cohen,küçük etki,969,0.8011010,3.0050418,2,966,9.6900000,,screenshots/V01.png
+V02,a-priori,0.25,0.05,0.8,3,,cohen,orta etki,159,0.8048873,3.0540042,2,156,9.9375000,,screenshots/V02.png
+V03,a-priori,0.4,0.05,0.8,3,,cohen,büyük etki,66,0.8180744,3.1428085,2,63,10.5600000,,screenshots/V03.png
+V04,a-priori,0.1,0.05,0.95,3,,cohen,"küçük etki, yüksek güç",1548,0.9500866,3.0015485,2,1545,15.4800000,,screenshots/V04.png
+V05,a-priori,0.25,0.05,0.95,3,,cohen,ana referans: üç tedavi kolu,252,0.9514888,3.0320649,2,249,15.7500000,,screenshots/V05.png
+V06,a-priori,0.4,0.05,0.95,3,,cohen,"büyük etki, yüksek güç",102,0.9547295,3.0882396,2,99,16.3200000,,screenshots/V06.png
+V07,a-priori,0.25,0.01,0.8,3,,alfa,sıkı α,228,0.8029054,4.7007255,2,225,14.2500000,,screenshots/V07.png
+V08,a-priori,0.25,0.01,0.95,3,,alfa,"sıkı α, yüksek güç",336,0.9506719,4.6694479,2,333,21.0000000,,screenshots/V08.png
+V09,a-priori,0.25,0.05,0.9,3,,guc,ara güç,207,0.9022417,3.0401584,2,204,12.9375000,,screenshots/V09.png
+V10,a-priori,0.25,0.1,0.8,3,,alfa,gevşek α,126,0.8008668,2.3462330,2,123,7.8750000,,screenshots/V10.png
+V11,a-priori,0.25,0.05,0.95,2,,k,k=2 ≡ t2-indep d=0.5 (hocanın referansı N=210 olmalı),210,0.9501287,3.8865546,1,208,13.1250000,,screenshots/V11.png
+V12,a-priori,0.25,0.05,0.95,4,,k,k=4,280,0.9509908,2.6373109,3,276,17.5000000,,screenshots/V12.png
+V13,a-priori,0.25,0.05,0.95,5,,k,k=5,305,0.9521313,2.4017397,4,300,19.0625000,,screenshots/V13.png
+V14,a-priori,0.25,0.05,0.95,10,,k,"k=10, büyük grup sayısı",390,0.9523634,1.9045377,9,380,24.3750000,,screenshots/V14.png
+V15,a-priori,0.3,0.05,0.85,3,,yuvarlama,ham N'in k'ya bölünmediği durum aranıyor,126,0.8548129,3.0698942,2,123,11.3400000,,screenshots/V15.png
+V16,a-priori,0.17,0.05,0.8,3,,yuvarlama,ham N'in k'ya bölünmediği durum aranıyor,339,0.8032639,3.0226013,2,336,9.7971000,,screenshots/V16.png
+V17,a-priori,0.33,0.05,0.9,4,,yuvarlama,k=4 ile yuvarlama,136,0.9044891,2.6732178,3,132,14.8104000,,screenshots/V17.png
+V18,a-priori,0.05,0.05,0.95,3,,kucuk_f,performans: iterasyon yakınsıyor mu,6183,0.9500867,2.9971849,2,6180,15.4575000,,screenshots/V18.png
+V19,a-priori,0.02,0.05,0.8,3,,kucuk_f,çok küçük etki,24090,0.8000049,2.9961049,2,24087,9.6360000,,screenshots/V19.png
+V20,a-priori,0.01,0.05,0.8,3,,kucuk_f,aşırı küçük: tavan/taşma var mı,96351,0.8000049,2.9958254,2,96348,9.6351000,,screenshots/V20.png
+V21,a-priori,1.0,0.05,0.8,3,,buyuk_f,büyük etki,15,0.8695976,3.8852938,2,12,15.0000000,,screenshots/V21.png
+V22,a-priori,2.0,0.05,0.95,3,,buyuk_f,N alt sınıra iniyor mu,9,0.9853857,5.1432528,2,6,36.0000000,,screenshots/V22.png
+V23,a-priori,5.0,0.05,0.8,3,,buyuk_f,aşırı büyük: minimum N,6,0.9998838,9.5520945,2,3,150,,screenshots/V23.png
+V24,a-priori,0.25,0.05,0.05,3,,guc_alfa,güç = α: tutarsız,6,0.0622405,9.5520945,2,3,0.3750000,,screenshots/V24.png
+V25,a-priori,0.25,0.05,0.03,3,,guc_alfa,güç < α: tutarsız,,,,,,,Power must be greater than or equal to alpha.,screenshots/V25.png
+V26,a-priori,0.25,0.05,0.99,3,,guc,çok yüksek güç,348,0.9904577,3.0218963,2,345,21.7500000,,screenshots/V26.png
+V27,a-priori,0.25,0.001,0.95,3,,alfa,çok küçük α,450,0.9514323,7.0156132,2,447,28.1250000,,screenshots/V27.png
+V28,a-priori,0,0.05,0.95,3,,gecersiz,f = 0 (dejenere),,,,,,,"Effect size f is outside the admissible range (1e-06, 50).",screenshots/V28.png
+V29,a-priori,-0.25,0.05,0.95,3,,gecersiz,negatif f,,,,,,,"Effect size f is outside the admissible range (1e-06, 50).",screenshots/V29.png
+V30,a-priori,0.25,0,0.95,3,,gecersiz,α = 0,,,,,,,"Alpha is outside the admissible range (1e-07, 1).",screenshots/V30.png
+V31,a-priori,0.25,1,0.95,3,,gecersiz,α = 1,,,,,,,"Alpha is outside the admissible range (1e-07, 1).",screenshots/V31.png
+V32,a-priori,0.25,0.05,1,3,,gecersiz,güç = 1,,,,,,,"Power is outside the admissible range (1e-07, 1).",screenshots/V32.png
+V33,a-priori,0.25,0.05,0.95,1,,gecersiz,tek grup,,,,,,,There must be at least 2 groups.,screenshots/V33.png
+V34,post-hoc,0.25,0.05,,3,60,posthoc,"üç kol, N=60",60,0.3744311,3.1588427,2,57,3.7500000,,screenshots/V34.png
+V35,post-hoc,0.4,0.05,,3,30,posthoc,"büyük etki, küçük N",30,0.4420732,3.3541308,2,27,4.8000000,,screenshots/V35.png
+V36,post-hoc,0.1,0.05,,3,300,posthoc,"küçük etki, büyük N",300,0.3186430,3.0261534,2,297,3.0000000,,screenshots/V36.png
+V37,post-hoc,0.25,0.01,,3,90,posthoc,sıkı α,90,0.2972804,4.8577703,2,87,5.6250000,,screenshots/V37.png
+V38,post-hoc,0.25,0.05,,3,61,posthoc,"N k'ya bölünmüyor: kabul mü, uyarı mı",61,0.3802907,3.1559320,2,58,3.8125000,Please note: The total sample size (61) is not a multiple of the number of groups (3). The analysis was based on the average group size.,screenshots/V38.png
+V39,post-hoc,0.25,0.05,,3,4,posthoc_sinir,N = k+1 (df2 = 1),4,0.0530691,199.5,2,1,0.2500000,Please note: The total sample size (4) is not a multiple of the number of groups (3). The analysis was based on the average group size.,screenshots/V39.png
+V40,post-hoc,0.25,0.05,,3,3,gecersiz,N = k (df2 = 0),,,,,,,Sample size must be greater than the number of groups (3).,screenshots/V40.png
+V41,post-hoc,0.25,0.05,,3,1000,posthoc_sinir,güç → 1,1000,1.0000000,3.0047517,2,997,62.5000000,Please note: The total sample size (1000) is not a multiple of the number of groups (3). The analysis was based on the average group size.,screenshots/V41.png
+V42,post-hoc,0.25,0.05,,2,210,posthoc,k=2 ≡ t2-indep post hoc (≈0.9501 olmalı),210,0.9501287,3.8865546,1,208,13.1250000,,screenshots/V42.png
+V43,post-hoc,0,0.05,,3,60,posthoc_sinir,f = 0: güç = α mı,60,0.0500000,3.1588427,2,57,0,,screenshots/V43.png
+V44,post-hoc,0.25,0.05,,5,100,posthoc,k=5,100,0.4663312,2.4674936,4,95,6.2500000,,screenshots/V44.png
+V45,a-priori,0.25,0.05,0.95,2.5,,gecersiz,kesirli grup sayısı,252,0.9514888,3.0320649,2,249,15.7500000,,screenshots/V45.png
+V46,a-priori,0.25,0.05,0.95,2.4,,gecersiz,kesirli grup sayısı,210,0.9501287,3.8865546,1,208,13.1250000,,screenshots/V46.png
+V47,a-priori,50,0.05,0.95,3,,buyuk_f,üst sınır f=50 (dahil mi),6,1.0000000,9.5520945,2,3,15000,,screenshots/V47.png
+V48,a-priori,5.1,0.05,0.95,3,,gosterim,λ ≥ 100 gösterim biçimi,6,0.9999216,9.5520945,2,3,156.06,,screenshots/V48.png
+V49,a-priori,50.01,0.05,0.95,3,,gecersiz,f üst sınırın hemen üstü,,,,,,,"Effect size f is outside the admissible range (1e-06, 50).",screenshots/V49.png
+V50,post-hoc,-0.1,0.05,,3,60,gecersiz,post hoc negatif f,,,,,,,"Effect size f is outside the admissible range (0, 50).",screenshots/V50.png
+V51,a-priori,0.001,0.05,0.80,3,,kucuk_f,aşırı küçük f: N ~ 10^7,9634692,0.8000000,2.9957332,2,9634689,9.6346920,,screenshots/V51.png
+V52,a-priori,0.0001,0.05,0.80,3,,kucuk_f,aşırı küçük f: N ~ 10^9,963468906,0.7999999,2.9957323,2,963468903,9.6346891,,screenshots/V52.png
+V53,a-priori,0.0005,0.05,0.80,3,,kucuk_f,R-18: sapmanın başladığı f (SPEC §6 #1),38538759,0.8000000,2.9957325,2,38538756,9.6346897,,screenshots/V53.png
+V54,a-priori,0.0002,0.05,0.80,3,,kucuk_f,R-18: sapmanın başladığı f (SPEC §6 #1),240867222,0.8000000,2.9957323,2,240867219,9.6346889,,screenshots/V54.png
+V55,a-priori,0.00005,0.05,0.80,3,,kucuk_f,R-18: N ~ 4·10^9 (SPEC §6 #1),3853878072,0.7999998,2.9957323,2,3853878069,9.6346952,,screenshots/V55.png
+V56,a-priori,0.000001,0.05,0.80,3,,kucuk_f,f alt sınırı 1e-6 (SPEC §6 #2),9.6363e+12,0.8000001,2.9957323,2,9.6363e+12,9.6363281,,screenshots/V56.png
+V57,a-priori,0,0.05,0.95,1,,gecersiz,iki geçersiz girdi: yalnız ilk mesaj mı (SPEC §6 #3),,,,,,,There must be at least 2 groups.,screenshots/V57.png
+V58,post-hoc,0.25,0.05,,3,60.5,posthoc,kesirli N yarım yukarı (SPEC §6 #4),61,0.3802907,3.1559320,2,58,3.8125000,Please note: The total sample size (61) is not a multiple of the number of groups (3). The analysis was based on the average group size.,screenshots/V58.png
+V59,a-priori,0.25,0.05,0.95,1.5,,gecersiz,kesirli grup 1.5 → 2 (SPEC §6 #5),210,0.9501287,3.8865546,1,208,13.1250000,,screenshots/V59.png
+V60,a-priori,0.25,0.05,0.95,1.4,,gecersiz,kesirli grup 1.4 → 1 hata (SPEC §6 #5),,,,,,,There must be at least 2 groups.,screenshots/V60.png
+V61,post-hoc,0.5,0.05,,3,600,gosterim,post hoc λ ≥ 100 (SPEC §6 #6),600,1.0000000,3.0108152,2,597,150,,screenshots/V61.png
+V62,post-hoc,0.01,0.005,,3,30,gosterim,"güç ve λ ≤ 0,01 gösterimi (SPEC §6 #7)",30,0.0050329,6.4885106,2,27,0.003,,screenshots/V62.png
+V63,a-priori,0.25,0.05,0.95,7,,k,büyük k kat yuvarlaması (SPEC §6 #8),343,0.9518838,2.1255907,6,336,21.4375000,,screenshots/V63.png

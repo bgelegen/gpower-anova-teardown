@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kaç hasta? · Tek yönlü ANOVA güç analizi</title>
+<meta name="description" content="G*Power 3.1.9.7'nin tek yönlü ANOVA hesabı, temiz oda yöntemiyle yeniden yazıldı. Aynı Python motoru tarayıcıda çalışır; 63 G*Power vektörüyle yan yana karşılaştırılır.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Spectral:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="#hesap">YZM301 · Teardown Sprint · İz 3</a>
+    <nav class="links">
+      <a href="#yan-yana">G*Power ile yan yana</a>
+      <a href="#yanildigi">G*Power nerede yanılıyor</a>
+      <a href="#testler">Testler</a>
+      <a href="https://github.com/bgelegen/gpower-anova-teardown">Kaynak kod</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero wrap" id="hesap">
+  <div class="intro">
+    <h1>Üç tedavi kolu için kaç hasta gerekir?</h1>
+    <p class="lede">G*Power 3.1.9.7'nin tek yönlü ANOVA hesabını tersine mühendislikle çözdük, kodunu hiç görmeyen ikinci bir ajanla sıfırdan yeniden yazdık ve 63 G*Power penceresiyle karşılaştırdık. Aşağıdaki hesaplayıcı, depodaki Python motorunun <em>kendisini</em> tarayıcınızda çalıştırır.</p>
+    <p class="byline">Batuhan Gelegen · Yazılım Gerçekleme ve Test (Dr. Öğr. Üyesi Nurettin Şenyer)</p>
+  </div>
+
+  <div class="calc">
+    <form class="inputs" id="form" autocomplete="off">
+      <fieldset class="mode" aria-label="Analiz türü">
+        <label><input type="radio" name="mode" value="a-priori" checked><span>A priori<small>N'i hesapla</small></span></label>
+        <label><input type="radio" name="mode" value="post-hoc"><span>Post hoc<small>gücü hesapla</small></span></label>
+      </fieldset>
+      <label class="field">
+        <span>Etki büyüklüğü f</span>
+        <input name="f" type="number" step="0.01" value="0.25" inputmode="decimal">
+        <span class="hint">Cohen: 0,10 küçük · 0,25 orta · 0,40 büyük</span>
+      </label>
+      <label class="field">
+        <span>α hata olasılığı</span>
+        <input name="alpha" type="number" step="0.01" value="0.05" inputmode="decimal">
+      </label>
+      <label class="field" data-only="a-priori">
+        <span>Güç (1 − β)</span>
+        <input name="power" type="number" step="0.01" value="0.95" inputmode="decimal">
+      </label>
+      <label class="field" data-only="post-hoc" hidden>
+        <span>Toplam örneklem N</span>
+        <input name="total_n" type="number" step="1" value="60" inputmode="numeric">
+      </label>
+      <label class="field">
+        <span>Grup sayısı k</span>
+        <input name="groups" type="number" step="1" value="3" inputmode="numeric">
+      </label>
+      <div class="presets" aria-label="Hazır örnekler">
+        <button type="button" data-preset='{"mode":"a-priori","f":0.25,"alpha":0.05,"power":0.95,"groups":3}'>Üç kol, orta etki</button>
+        <button type="button" data-preset='{"mode":"a-priori","f":0.25,"alpha":0.05,"power":0.95,"groups":2}'>k = 2 (hocanın t testi)</button>
+        <button type="button" data-preset='{"mode":"post-hoc","f":0.25,"alpha":0.05,"total_n":61,"groups":3}'>N = 61, bölünmüyor</button>
+        <button type="button" data-preset='{"mode":"a-priori","f":0.25,"alpha":0.05,"power":0.03,"groups":3}'>Güç &lt; α</button>
+      </div>
+    </form>
+
+    <div class="output" aria-live="polite">
+      <p class="engine-status" id="status"><span class="spinner" aria-hidden="true"></span>Python motoru tarayıcıya yükleniyor (scipy dahil, ilk açılışta ~10 sn)…</p>
+      <div class="result" id="result" hidden>
+        <p class="headline" id="headline"></p>
+        <figure class="plot">
+          <svg id="plot" viewBox="0 0 640 260" role="img" aria-labelledby="plot-cap"></svg>
+          <figcaption id="plot-cap"><span class="key h0"></span>H0: merkezi F <span class="key h1"></span>H1: merkezi olmayan F <span class="key crit"></span>kritik F</figcaption>
+        </figure>
+        <dl class="params" id="params"></dl>
+        <p class="note" id="note" hidden></p>
+        <div class="cli">
+          <code id="cmd"></code>
+          <code id="json"></code>
+        </div>
+      </div>
+      <p class="error" id="error" hidden></p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap band" id="yan-yana">
+  <div class="section-head">
+    <h2>G*Power ile yan yana</h2>
+    <p>Her satır G*Power 3.1.9.7 penceresine elle girilmiş bir vektördür; yanında motorun aynı girdideki çıktısı durur. Beklenen değeri ajan değil, kara kutunun kendisi belirledi. Satıra tıklayınca pencerenin ekran görüntüsü açılır.</p>
+  </div>
+  <div class="toolbar">
+    <div class="filters" role="group" aria-label="Süzgeç" id="filters"></div>
+    <button class="verify" id="verify" type="button" disabled>Tarayıcıda yeniden doğrula</button>
+  </div>
+  <p class="verify-out" id="verify-out" aria-live="polite"></p>
+  <div class="table-wrap tall">
+    <table class="vectors" id="vectors">
+      <thead><tr><th>Vektör</th><th>Mod</th><th>f</th><th>α</th><th>güç / N</th><th>k</th><th>G*Power</th><th>Bu motor</th><th>Durum</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</section>
+
+<section class="wrap" id="yanildigi">
+  <div class="section-head">
+    <h2>G*Power nerede yanılıyor</h2>
+    <p>Çok küçük etkilerde (payda serbestlik derecesi 2·10⁸'i geçince) iki program ayrışıyor. Kimin doğru olduğunu ikisinden de bağımsız, 40 basamak hassasiyetle hesaplanan güç gösteriyor: hedef güç 0,80'e ulaşan en küçük 3'ün katını motor buluyor, G*Power bulamıyor.</p>
+  </div>
+  <div class="table-wrap">
+    <table class="r18">
+      <thead><tr><th>Vektör</th><th>f</th><th>G*Power N</th><th>En küçük doğru N</th><th>Fark</th><th>G*Power'ın N'inde gerçek güç</th></tr></thead>
+      <tbody>
+        <tr><td>V51</td><td>0,001</td><td>9 634 692</td><td>9 634 692</td><td class="same">aynı</td><td>0,800000006</td></tr>
+        <tr><td>V53</td><td>0,0005</td><td>38 538 759</td><td>38 538 759</td><td class="same">aynı</td><td>0,800000006</td></tr>
+        <tr class="bad"><td>V54</td><td>0,0002</td><td>240 867 222</td><td>240 867 225</td><td class="under">3 hasta eksik</td><td>0,7999999953 — hedefin altında</td></tr>
+        <tr class="bad"><td>V52</td><td>0,0001</td><td>963 468 906</td><td>963 468 891</td><td class="over">15 hasta fazla</td><td>0,800000007</td></tr>
+        <tr class="bad"><td>V55</td><td>0,00005</td><td>3 853 878 072</td><td>3 853 875 552</td><td class="over">2 520 hasta fazla</td><td>0,800000275</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="aside">Kanıt kodu: <a href="https://github.com/bgelegen/gpower-anova-teardown/blob/main/tests/test_r18_high_precision.py">tests/test_r18_high_precision.py</a> · ayrıntı: <a href="https://github.com/bgelegen/gpower-anova-teardown/blob/main/oracle/R18_YUKSEK_HASSASIYET.md">R18_YUKSEK_HASSASIYET.md</a></p>
+</section>
+
+<section class="wrap band" id="testler">
+  <div class="section-head">
+    <h2>Testleri de test ettik</h2>
+    <p>Geçen testler tek başına bir şey kanıtlamaz; bir hatayı yakalayıp yakalamadıkları önemlidir.</p>
+  </div>
+  <dl class="evidence">
+    <div><dt>63</dt><dd>G*Power penceresi, ekran görüntüleriyle. 59'u tüm alanlarıyla birebir, 4'ü yukarıdaki sapma.</dd></div>
+    <div><dt>1 485</dt><dd>statsmodels vektörü. Kütüphane kesirli N verir, G*Power k'nın katına yuvarlar; kural tutuyor.</dd></div>
+    <div><dt>16 000</dt><dd>rastgele girdi, 8 değişmez üzerinde: f büyüdükçe N küçülür, N her zaman k'nın katıdır, k = 2'de sonuç bağımsız bir t testi formülüyle aynıdır…</dd></div>
+    <div><dt>25 / 26</dt><dd>mutant öldürüldü. Koda bilerek sokulan hataları testler yakaladı; ilk kampanyada yaşayan iki mutant iki gerçek test açığını gösterdi, kapatıldı. Yaşayan tek mutant eşdeğerdir.</dd></div>
+    <div><dt>19 / 20</dt><dd>Türkçe klinik soruyu MCP üzerinden doğru yanıtlayan ajan; hiçbir yanıtta kendi hesapladığı sayı yok.</dd></div>
+  </dl>
+</section>
+
+<section class="wrap" id="nasil">
+  <div class="section-head">
+    <h2>Nasıl yapıldı</h2>
+  </div>
+  <ol class="steps">
+    <li><h3>Sök</h3><p>Bir ajan REA ve Ghidra ile G*Power'ın içine baktı; kılavuzda olmayan 23 davranışı adres ve fonksiyon iziyle <a href="https://github.com/bgelegen/gpower-anova-teardown/blob/main/LEDGER.md">kanıt defterine</a> yazdı. En önemlisi: N, grup sayısının katına yukarı yuvarlanıyor (251 değil 252).</p></li>
+    <li><h3>Kanıtla</h3><p>Her iddia G*Power penceresinden alınan bir vektörle sınandı; yanlış çıkan iddialar <a href="https://github.com/bgelegen/gpower-anova-teardown/blob/main/HALLUCINATIONS.md">halüsinasyon günlüğüne</a> girdi.</p></li>
+    <li><h3>Spec çıkar</h3><p>Bulgular 18 kurallık bir <a href="https://github.com/bgelegen/gpower-anova-teardown/blob/main/SPEC.md">spesifikasyona</a> ve Gherkin kabul kriterlerine dönüştü. Spec'te kod ya da adres yok.</p></li>
+    <li><h3>Temiz odada yeniden yaz</h3><p>İkinci ajan yalnızca spec ile, REA olmadan, başka bir klasörde motoru, komut satırını ve MCP sunucusunu yazdı. Binary'yi hiç görmedi.</p></li>
+    <li><h3>Diferansiyel test</h3><p>Aynı girdiler iki programa verildi; her uyuşmazlık ya bizim hatamız ya da kaçırdığımız bir kuraldı. Tek açıklanamayan fark, G*Power'ın kendi sayısal kayması çıktı.</p></li>
+  </ol>
+</section>
+
+<section class="wrap band" id="video">
+  <div class="section-head">
+    <h2>Komut satırında</h2>
+    <p>Otomatik değerlendiricinin kullandığı arayüz: tek satır JSON, geçersiz girdide sıfırdan farklı çıkış kodu.</p>
+  </div>
+  <video class="demo" controls preload="metadata" src="demo-cli.mp4"></video>
+</section>
+</main>
+
+<footer class="wrap foot">
+  <p>Bu site G*Power değildir ve onun kodunu içermez. G*Power: Faul, Erdfelder, Lang ve Buchner (2007), <i>Behavior Research Methods, 39</i>, 175–191; Faul, Erdfelder, Buchner ve Lang (2009), <i>Behavior Research Methods, 41</i>, 1149–1160. G*Power yalnızca <a href="https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower">resmî sayfasından</a> indirilmelidir.</p>
+  <p>Hesaplar <a href="https://pyodide.org">Pyodide</a> ile tarayıcınızda yapılır; hiçbir veri bir sunucuya gönderilmez.</p>
+</footer>
+
+<dialog id="shot">
+  <form method="dialog" class="shot-close"><button aria-label="Kapat">Kapat</button></form>
+  <h3 id="shot-title"></h3>
+  <div class="shot-body">
+    <img id="shot-img" alt="">
+    <dl class="compare" id="shot-compare"></dl>
+  </div>
+</dialog>
+
+<script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
