@@ -87,13 +87,41 @@ def mcp_config() -> Path:
     return path
 
 
+def scrub(text: str) -> str:
+    """Loglardaki ekran görüntüsü base64'lerini (iki kopya: içerik ve tool_use_result) özetle değiştirir."""
+    import hashlib
+
+    def walk(o):
+        if isinstance(o, dict):
+            for k, v in list(o.items()):
+                if k in ("base64", "data") and isinstance(v, str) and len(v) > 1000:
+                    o[k] = (f"<base64 PNG kaldırıldı: {len(v)} karakter, "
+                            f"sha256={hashlib.sha256(v.encode()).hexdigest()[:16]}>")
+                else:
+                    walk(v)
+        elif isinstance(o, list):
+            for x in o:
+                walk(x)
+
+    out = []
+    for line in text.splitlines():
+        try:
+            e = json.loads(line)
+        except json.JSONDecodeError:
+            out.append(line)
+            continue
+        walk(e)
+        out.append(json.dumps(e, ensure_ascii=False))
+    return "\n".join(out) + "\n"
+
+
 def run(prompt: str, args: list[str], log: Path) -> list[dict]:
     cmd = [claude_exe(), "-p", prompt, *args, "--output-format", "stream-json",
            "--verbose", "--no-session-persistence", "--disable-slash-commands"]
     t0 = time.time()
     proc = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True,
                           encoding="utf-8", errors="replace", timeout=600)
-    log.write_text(proc.stdout + ("\n#STDERR\n" + proc.stderr if proc.stderr else ""),
+    log.write_text(scrub(proc.stdout) + ("\n#STDERR\n" + proc.stderr if proc.stderr else ""),
                    encoding="utf-8")
     events = []
     for line in proc.stdout.splitlines():
