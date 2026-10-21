@@ -232,10 +232,14 @@ t-testi) ajanın kendisi tarafından reddedilir ve araç çağrılmaz.
 
 ## Demo
 
-[`docs/demo-cli.mp4`](docs/demo-cli.mp4) — 58 sn, 1920×1080: CLI koşusunun ekran kaydı
-(a priori 252, k = 2 → hocanın referansı 210, 7 hanede G*Power ile birebir, post hoc uyarısı,
-geçersiz girdi, diferansiyel test). Kaydı yeniden üretmek için: `docs/demo-cli.sh`
-(terminal kaydı: `docs/demo-cli.cast`).
+| Video | Süre | Çözünürlük | İçerik |
+|-------|-----:|------------|--------|
+| [`docs/demo-cli.mp4`](docs/demo-cli.mp4) | 58 sn | **3840×2160** | Ödevin istediği CLI koşusunun ekran kaydı: a priori 252, k = 2 → hocanın referansı 210, 7 hanede G*Power ile birebir, post hoc uyarısı, geçersiz girdi, diferansiyel + özellik testleri |
+| [`docs/tanitim.mp4`](docs/tanitim.mp4) | ~70 sn | **3840×2160** | Canlı demo, 63 vektörlük karşılaştırma, G*Power'ın yanıldığı yer, mutasyon/özellik testleri, temiz oda akışı |
+
+Kareler doğrudan 4K'da çizildi (büyütme yok): terminal kaydı `docs/demo-cli.cast` asciinema
+oynatıcısında kare kare 3840×2160 olarak işlendi; site sahneleri 2× piksel yoğunluğuyla çekildi.
+Terminal kaydını yeniden üretmek için: `docs/demo-cli.sh`.
 
 ## Etik ve yasal çerçeve
 

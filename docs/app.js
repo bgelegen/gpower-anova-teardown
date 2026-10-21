@@ -113,8 +113,8 @@ function compute() {
   if (out.code !== 0) {
     $('#result').hidden = false;
     $('#headline').textContent = '';
-    $('#plot').replaceChildren();
-    $('#params').replaceChildren();
+    $('.plot').hidden = true;
+    $('#params').hidden = true;
     $('#note').hidden = true;
     err.hidden = false;
     err.replaceChildren(el('b', { text: 'G*Power bu girdiyi reddeder' }), document.createTextNode(out.payload.error));
@@ -122,6 +122,8 @@ function compute() {
   }
   err.hidden = true;
   $('#result').hidden = false;
+  $('.plot').hidden = false;
+  $('#params').hidden = false;
   const s = out.shown, pl = out.payload, k = Number(pl.df1) + 1;
   const h = $('#headline');
   if (p.mode === 'a-priori') {
