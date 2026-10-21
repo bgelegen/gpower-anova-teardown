@@ -1,0 +1,1163 @@
+[
+ {
+  "id": "S01",
+  "soru": "Üç farklı antihipertansif tedavi kolunu karşılaştıran bir çalışma planlıyoruz. Orta düzey etki (Cohen f = 0,25), α = 0,05 ve %95 güç istiyoruz. Toplam kaç hasta, kol başına kaç hasta gerekir?",
+  "oracle": "V05",
+  "mcp": {
+   "calls": [
+    {
+     "name": "mcp__gpower__anova_oneway",
+     "input": {
+      "mode": "a-priori",
+      "f": 0.25,
+      "alpha": 0.05,
+      "power": 0.95,
+      "groups": 3
+     }
+    }
+   ],
+   "results": [
+    "{\"n_per_group\":84,\"n_total\":252,\"actual_power\":0.9515,\"critical\":3.0321,\"df1\":2,\"df2\":249,\"ncp\":15.75}"
+   ],
+   "final": "Üç kollu tek yönlü ANOVA (F testi, sabit etkiler, omnibus) için a-priori hesaplama sonucu:\n\n- **Kol başına hasta sayısı (n):** 84\n- **Toplam hasta sayısı (N):** 252\n- **Gerçekleşen güç:** 0,9515\n- **Kritik F değeri:** 3,0321 (df1 = 2, df2 = 249)\n- **Non-centralite parametresi (λ):** 15,75\n\nGirdiler: Cohen f = 0,25, α = 0,05, güç = 0,95, grup sayısı = 3.\n\nUyarı veya hata dönmedi.",
+   "turns": 2,
+   "cost_usd": 0.00082474,
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 242,
+    "cache_read_input_tokens": 34474,
+    "output_tokens": 383,
+    "output_tokens_details": {
+     "thinking_tokens": 0
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 242,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 228,
+      "cache_read_input_tokens": 17237,
+      "cache_creation_input_tokens": 242,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 242
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "tokens_in": 34720,
+   "tokens_out": 383
+  },
+  "degerlendirme": {
+   "gecti": true,
+   "kontroller": {
+    "arac_cagrildi": true,
+    "parametreler_dogru": true,
+    "yanitta_n_total": true,
+    "yanitta_n_per_group": true,
+    "hesap_yapmadi": true
+   }
+  },
+  "gui": {
+   "calls": [
+    {
+     "name": "Read",
+     "input": {
+      "file_path": "/home/claude/gpower-anova-teardown/oracle/screenshots/V05.png"
+     }
+    }
+   ],
+   "results": [
+    ""
+   ],
+   "final": "**Toplam hasta sayısı: 252** (G*Power ekranındaki \"Total sample size\" alanı).\n\nEkran görüntüsünde kol başına hasta sayısı yazmıyor, bu yüzden onu buradan aktaramıyorum. Girdiler: Effect size f = 0,25, α = 0,05, güç = 0,95, grup sayısı = 3. Ekranda ayrıca Numerator df = 2, Denominator df = 249, kritik F = 3,0320649, λ = 15,75 ve gerçekleşen güç = 0,9514888 görünüyor.",
+   "turns": 2,
+   "cost_usd": 0.0009570399999999999,
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 34794,
+    "output_tokens": 600,
+    "output_tokens_details": {
+     "thinking_tokens": 318
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 0,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 523,
+      "cache_read_input_tokens": 17754,
+      "cache_creation_input_tokens": 0,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 0
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "tokens_in": 34798,
+   "tokens_out": 600
+  }
+ },
+ {
+  "id": "S02",
+  "soru": "Dört kollu bir ağrı kesici çalışması: f = 0,25, α = 0,05, güç 0,95. Gereken toplam örneklem nedir?",
+  "oracle": "V12",
+  "mcp": {
+   "calls": [
+    {
+     "name": "mcp__gpower__anova_oneway",
+     "input": {
+      "mode": "a-priori",
+      "f": 0.25,
+      "alpha": 0.05,
+      "power": 0.95,
+      "groups": 4
+     }
+    }
+   ],
+   "results": [
+    "{\"n_per_group\":70,\"n_total\":280,\"actual_power\":0.951,\"critical\":2.6373,\"df1\":3,\"df2\":276,\"ncp\":17.5}"
+   ],
+   "final": "Araç sonucuna göre dört kollu çalışma için gereken toplam örneklem **280**'dir (grup başına 70).\n\nAracın döndürdüğü diğer değerler:\n- Gerçekleşen güç (actual power): 0.951\n- Kritik F değeri: 2.6373\n- Serbestlik dereceleri: df1 = 3, df2 = 276\n- Merkezilik parametresi (ncp): 17.5\n\nAraç herhangi bir uyarı ya da hata döndürmedi.",
+   "turns": 2,
+   "cost_usd": 0.0011388499999999998,
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 1757,
+    "cache_read_input_tokens": 32955,
+    "output_tokens": 432,
+    "output_tokens_details": {
+     "thinking_tokens": 100
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 1757,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 176,
+      "cache_read_input_tokens": 17185,
+      "cache_creation_input_tokens": 342,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 342
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "tokens_in": 34716,
+   "tokens_out": 432
+  },
+  "degerlendirme": {
+   "gecti": true,
+   "kontroller": {
+    "arac_cagrildi": true,
+    "parametreler_dogru": true,
+    "yanitta_n_total": true,
+    "hesap_yapmadi": true
+   }
+  },
+  "gui": {
+   "calls": [
+    {
+     "name": "Read",
+     "input": {
+      "file_path": "/home/claude/gpower-anova-teardown/oracle/screenshots/V12.png"
+     }
+    }
+   ],
+   "results": [
+    ""
+   ],
+   "final": "Ekran görüntüsüne göre gereken toplam örneklem **280**'dir.\n\nGirdiler: f = 0,25, α = 0,05, güç = 0,95, 4 grup. Çıktılar: λ = 17,5, kritik F = 2,6373, df = 3 ve 276, gerçekleşen güç = 0,9510.",
+   "turns": 2,
+   "cost_usd": 0.00118526,
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 2184,
+    "cache_read_input_tokens": 32506,
+    "output_tokens": 196,
+    "output_tokens_details": {
+     "thinking_tokens": 0
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 2184,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 119,
+      "cache_read_input_tokens": 16988,
+      "cache_creation_input_tokens": 714,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 714
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "tokens_in": 34694,
+   "tokens_out": 196
+  }
+ },
+ {
+  "id": "S03",
+  "soru": "Üç diyet programını karşılaştıracağız ve küçük bir etki bekliyoruz (f = 0,10). α = 0,05, güç %80 için kaç katılımcı lazım?",
+  "oracle": "V01",
+  "mcp": {
+   "calls": [
+    {
+     "name": "mcp__gpower__anova_oneway",
+     "input": {
+      "mode": "a-priori",
+      "f": 0.1,
+      "alpha": 0.05,
+      "power": 0.8,
+      "groups": 3
+     }
+    }
+   ],
+   "results": [
+    "{\"n_per_group\":323,\"n_total\":969,\"actual_power\":0.8011,\"critical\":3.005,\"df1\":2,\"df2\":966,\"ncp\":9.69}"
+   ],
+   "final": "Üç diyet programını karşılaştırmak için (tek yönlü ANOVA, f = 0,10, α = 0,05, güç = 0,80):\n\n- **Grup başına katılımcı (n_per_group):** 323\n- **Toplam katılımcı (n_total):** 969\n- **Gerçekleşen güç (actual_power):** 0,8011\n- **Kritik F değeri:** 3,005\n- **Serbestlik dereceleri:** df1 = 2, df2 = 966\n- **Merkezi olmayanlık parametresi (ncp):** 9,69\n\nYani her gruptan 323 kişi, toplamda 969 katılımcı gerekir. Bu, f = 0,10 gibi küçük bir etkiyi %80 güçle tespit etmek için hesaplanan değerdir.",
+   "turns": 2,
+   "cost_usd": 0.0012637500000000001,
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 1771,
+    "cache_read_input_tokens": 32965,
+    "output_tokens": 537,
+    "output_tokens_details": {
+     "thinking_tokens": 104
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 1771,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 277,
+      "cache_read_input_tokens": 17195,
+      "cache_creation_input_tokens": 346,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 346
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "tokens_in": 34740,
+   "tokens_out": 537
+  },
+  "degerlendirme": {
+   "gecti": true,
+   "kontroller": {
+    "arac_cagrildi": true,
+    "parametreler_dogru": true,
+    "yanitta_n_total": true,
+    "hesap_yapmadi": true
+   }
+  },
+  "gui": {
+   "calls": [
+    {
+     "name": "Read",
+     "input": {
+      "file_path": "/home/claude/gpower-anova-teardown/oracle/screenshots/V01.png"
+     }
+    }
+   ],
+   "results": [
+    ""
+   ],
+   "final": "Ekran görüntüsüne göre gereken toplam katılımcı sayısı **969**'dur.\n\nGirdiler: f = 0,10, α = 0,05, güç = 0,80, grup sayısı = 3. Çıktıda gerçek güç 0,8011 olarak görünüyor.",
+   "turns": 2,
+   "cost_usd": 0.00114936,
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 1904,
+    "cache_read_input_tokens": 32516,
+    "output_tokens": 350,
+    "output_tokens_details": {
+     "thinking_tokens": 170
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 1904,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 273,
+      "cache_read_input_tokens": 16998,
+      "cache_creation_input_tokens": 424,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 424
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "tokens_in": 34424,
+   "tokens_out": 350
+  }
+ },
+ {
+  "id": "S04",
+  "soru": "Üç tedavi kolunda toplam 60 hastamız var. Etki büyüklüğü f = 0,25 ve α = 0,05 ise çalışmanın gücü nedir?",
+  "oracle": "V34",
+  "mcp": {
+   "calls": [
+    {
+     "name": "mcp__gpower__anova_oneway",
+     "input": {
+      "mode": "post-hoc",
+      "f": 0.25,
+      "alpha": 0.05,
+      "n_total": 60,
+      "groups": 3
+     }
+    }
+   ],
+   "results": [
+    "{\"n_per_group\":20,\"n_total\":60,\"actual_power\":0.3744,\"critical\":3.1588,\"df1\":2,\"df2\":57,\"ncp\":3.75}"
+   ],
+   "final": "Araç sonucuna göre, tek yönlü ANOVA (sabit etkiler, omnibus F testi) için:\n\n- Grup sayısı: 3\n- Grup başına hasta sayısı (n_per_group): 20\n- Toplam örneklem (n_total): 60\n- Etki büyüklüğü (f): 0,25\n- α: 0,05\n- Kritik F değeri (critical): 3,1588\n- Serbestlik dereceleri: df1 = 2, df2 = 57\n- Non-merkezilik parametresi (ncp): 3,75\n- **Gerçekleşen güç (actual_power): 0,3744**\n\nBu çalışmanın gücü yaklaşık **0,37**'dir. Yani f = 0,25 etkisini 60 hastayla tespit etme olasılığı düşük; genellikle hedeflenen güç olan 0,80'in çok altında.",
+   "turns": 2,
+   "cost_usd": 0.00112603,
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 1666,
+    "cache_read_input_tokens": 32963,
+    "output_tokens": 460,
+    "output_tokens_details": {
+     "thinking_tokens": 0
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 1666,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 304,
+      "cache_read_input_tokens": 17193,
+      "cache_creation_input_tokens": 243,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 243
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "tokens_in": 34633,
+   "tokens_out": 460
+  },
+  "degerlendirme": {
+   "gecti": false,
+   "kontroller": {
+    "arac_cagrildi": true,
+    "parametreler_dogru": true,
+    "yanitta_actual_power": true,
+    "hesap_yapmadi": false,
+    "_kaynaksiz_sayilar": [
+     "0.37"
+    ]
+   }
+  },
+  "gui": {
+   "calls": [
+    {
+     "name": "Read",
+     "input": {
+      "file_path": "/home/claude/gpower-anova-teardown/oracle/screenshots/V34.png"
+     }
+    }
+   ],
+   "results": [
+    ""
+   ],
+   "final": "Ekran görüntüsüne göre çalışmanın gücü (1−β) **0,3744311**, yani yaklaşık **%37,4**.\n\nGirdiler: f = 0,25, α = 0,05, toplam örneklem = 60, grup sayısı = 3. Çıktılar: λ = 3,75, kritik F = 3,1588, pay df = 2, payda df = 57.\n\nBu güç değeri düşüktür; genellikle %80 hedeflenir.",
+   "turns": 2,
+   "cost_usd": 0.00117374,
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 2192,
+    "cache_read_input_tokens": 32514,
+    "output_tokens": 240,
+    "output_tokens_details": {
+     "thinking_tokens": 0
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 2192,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 163,
+      "cache_read_input_tokens": 16996,
+      "cache_creation_input_tokens": 714,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 714
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "tokens_in": 34710,
+   "tokens_out": 240
+  }
+ },
+ {
+  "id": "S05",
+  "soru": "Beş farklı fizyoterapi protokolü, toplam 100 hasta. f = 0,25, α = 0,05 için elde edilen güç ne kadar?",
+  "oracle": "V44",
+  "mcp": {
+   "calls": [
+    {
+     "name": "mcp__gpower__anova_oneway",
+     "input": {
+      "mode": "post-hoc",
+      "f": 0.25,
+      "alpha": 0.05,
+      "n_total": 100,
+      "groups": 5
+     }
+    }
+   ],
+   "results": [
+    "{\"n_per_group\":20,\"n_total\":100,\"actual_power\":0.4663,\"critical\":2.4675,\"df1\":4,\"df2\":95,\"ncp\":6.25}"
+   ],
+   "final": "Araç sonucuna göre, 5 grup ve toplam 100 hasta ile f = 0,25, α = 0,05 için elde edilen güç **0,4663**'tür.\n\nAyrıntılar:\n- Grup başına hasta sayısı: 20\n- Serbestlik dereceleri: df1 = 4, df2 = 95\n- Kritik F değeri: 2,4675\n- Merkezi olmayan parametre (ncp): 6,25\n- Uyarı: Yok\n\nBu güç yaklaşık %47'dir ve genellikle kabul edilen %80 eşiğinin altındadır. Bu çalışma için yaygın olarak kullanılan %80 gücü elde etmek amacıyla gerekli toplam örneklem büyüklüğünü de hesaplayabilirim.",
+   "turns": 2,
+   "cost_usd": 0.00106135,
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 1727,
+    "cache_read_input_tokens": 32955,
+    "output_tokens": 501,
+    "output_tokens_details": {
+     "thinking_tokens": 68
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 1727,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 276,
+      "cache_read_input_tokens": 17185,
+      "cache_creation_input_tokens": 312,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 312
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "tokens_in": 34686,
+   "tokens_out": 501
+  },
+  "degerlendirme": {
+   "gecti": false,
+   "kontroller": {
+    "arac_cagrildi": true,
+    "parametreler_dogru": true,
+    "yanitta_actual_power": true,
+    "hesap_yapmadi": false,
+    "_kaynaksiz_sayilar": [
+     "47"
+    ]
+   }
+  },
+  "gui": {
+   "calls": [
+    {
+     "name": "Read",
+     "input": {
+      "file_path": "/home/claude/gpower-anova-teardown/oracle/screenshots/V44.png"
+     }
+    }
+   ],
+   "results": [
+    ""
+   ],
+   "final": "Ekran görüntüsüne göre güç (1−β) **0,4663312** (yaklaşık %46,6).\n\nGirdiler: f = 0,25; α = 0,05; toplam örneklem = 100; grup sayısı = 5.\nÇıktılar: λ = 6,25; kritik F = 2,4674936; pay df = 4; payda df = 95.",
+   "turns": 2,
+   "cost_usd": 0.00120326,
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 2184,
+    "cache_read_input_tokens": 32506,
+    "output_tokens": 202,
+    "output_tokens_details": {
+     "thinking_tokens": 0
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 2184,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 125,
+      "cache_read_input_tokens": 16988,
+      "cache_creation_input_tokens": 714,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 714
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "tokens_in": 34694,
+   "tokens_out": 202
+  }
+ },
+ {
+  "id": "S06",
+  "soru": "Üç kol, büyük etki (f = 0,40), α = 0,05, güç %80. Toplam örneklem büyüklüğü?",
+  "oracle": "V03",
+  "mcp": {
+   "calls": [
+    {
+     "name": "mcp__gpower__anova_oneway",
+     "input": {
+      "mode": "a-priori",
+      "f": 0.4,
+      "alpha": 0.05,
+      "power": 0.8,
+      "groups": 3
+     }
+    }
+   ],
+   "results": [
+    "{\"n_per_group\":22,\"n_total\":66,\"actual_power\":0.8181,\"critical\":3.1428,\"df1\":2,\"df2\":63,\"ncp\":10.56}"
+   ],
+   "final": "Araç sonucu:\n\n- **Toplam örneklem büyüklüğü (n_total): 66**\n- Grup başına n: 22\n- Gerçekleşen güç (actual_power): 0,8181\n- Kritik F: 3,1428\n- df1: 2, df2: 63\n- ncp: 10,56\n\nÜç kol, f = 0,40, α = 0,05 ve %80 güç için toplam 66 katılımcı (kol başına 22) gerekiyor. Gerçekleşen güç 0,8181 olarak hesaplandı.",
+   "turns": 2,
+   "cost_usd": 0.00117556,
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 1648,
+    "cache_read_input_tokens": 32946,
+    "output_tokens": 342,
+    "output_tokens_details": {
+     "thinking_tokens": 0
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 1648,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 187,
+      "cache_read_input_tokens": 17176,
+      "cache_creation_input_tokens": 242,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 242
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "tokens_in": 34598,
+   "tokens_out": 342
+  },
+  "degerlendirme": {
+   "gecti": true,
+   "kontroller": {
+    "arac_cagrildi": true,
+    "parametreler_dogru": true,
+    "yanitta_n_total": true,
+    "hesap_yapmadi": true
+   }
+  },
+  "gui": {
+   "calls": [
+    {
+     "name": "Read",
+     "input": {
+      "file_path": "/home/claude/gpower-anova-teardown/oracle/screenshots/V03.png"
+     }
+    }
+   ],
+   "results": [
+    ""
+   ],
+   "final": "Ekran görüntüsüne göre toplam örneklem büyüklüğü **66**'dır.\n\nGirdiler: f = 0,40, α = 0,05, güç = 0,80, grup sayısı = 3. Çıktılarda ise pay serbestlik derecesi 2, payda serbestlik derecesi 63 ve gerçekleşen güç 0,818 görünmektedir.",
+   "turns": 2,
+   "cost_usd": 0.00112147,
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 2175,
+    "cache_read_input_tokens": 32497,
+    "output_tokens": 212,
+    "output_tokens_details": {
+     "thinking_tokens": 0
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 2175,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 135,
+      "cache_read_input_tokens": 16979,
+      "cache_creation_input_tokens": 714,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 714
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "tokens_in": 34676,
+   "tokens_out": 212
+  }
+ },
+ {
+  "id": "S07",
+  "soru": "Etik kurul α = 0,01 istiyor. Üç kol, f = 0,25, güç 0,95 ile kaç hasta gerekir?",
+  "oracle": "V08",
+  "mcp": {
+   "calls": [
+    {
+     "name": "mcp__gpower__anova_oneway",
+     "input": {
+      "mode": "a-priori",
+      "f": 0.25,
+      "alpha": 0.01,
+      "power": 0.95,
+      "groups": 3
+     }
+    }
+   ],
+   "results": [
+    "{\"n_per_group\":112,\"n_total\":336,\"actual_power\":0.9507,\"critical\":4.6694,\"df1\":2,\"df2\":333,\"ncp\":21}"
+   ],
+   "final": "Araca göre gerekli örneklem büyüklüğü **toplam 336 hasta**, yani kol başına **112 hasta**.\n\n| Parametre | Değer |\n|---|---|\n| Grup sayısı | 3 |\n| Etki büyüklüğü f | 0,25 |\n| α | 0,01 |\n| Hedef güç | 0,95 |\n| Kol başına n | 112 |\n| Toplam n | 336 |\n| Gerçekleşen güç | 0,9507 |\n| Kritik F | 4,6694 |\n| df1 / df2 | 2 / 333 |\n| Merkezi olmayan parametre (λ) | 21 |\n\nAraç herhangi bir uyarı ya da hata döndürmedi. Bu hesap yalnızca tek yönlü ANOVA omnibus F testi için geçerlidir. Çalışmanız farklı bir test ya da ön planda kontrast analizi gerektiriyorsa sonucu ayrıca değerlendirmeniz gerekir.",
+   "turns": 2,
+   "cost_usd": 0.0012385,
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 1758,
+    "cache_read_input_tokens": 32950,
+    "output_tokens": 682,
+    "output_tokens_details": {
+     "thinking_tokens": 179
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 1758,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 419,
+      "cache_read_input_tokens": 17180,
+      "cache_creation_input_tokens": 348,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 348
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "tokens_in": 34712,
+   "tokens_out": 682
+  },
+  "degerlendirme": {
+   "gecti": true,
+   "kontroller": {
+    "arac_cagrildi": true,
+    "parametreler_dogru": true,
+    "yanitta_n_total": true,
+    "hesap_yapmadi": true
+   }
+  },
+  "gui": {
+   "calls": [
+    {
+     "name": "Read",
+     "input": {
+      "file_path": "/home/claude/gpower-anova-teardown/oracle/screenshots/V08.png"
+     }
+    }
+   ],
+   "results": [
+    ""
+   ],
+   "final": "G*Power ekran görüntüsüne göre gereken toplam örneklem büyüklüğü **336 hasta**.\n\nEkrandaki girdiler: etki büyüklüğü f = 0,25, α = 0,01, güç = 0,95, grup sayısı = 3. Çıktılarda ise kritik F = 4,6694, payda serbestlik derecesi = 333 ve gerçekleşen güç = 0,9507 görünüyor.",
+   "turns": 2,
+   "cost_usd": 0.00122021,
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 2179,
+    "cache_read_input_tokens": 32501,
+    "output_tokens": 377,
+    "output_tokens_details": {
+     "thinking_tokens": 144
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 2179,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 300,
+      "cache_read_input_tokens": 16983,
+      "cache_creation_input_tokens": 714,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 714
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "tokens_in": 34684,
+   "tokens_out": 377
+  }
+ },
+ {
+  "id": "S08",
+  "soru": "Üç tedavi kolunda toplam 61 hasta topladık (kollar eşit değil). f = 0,25, α = 0,05 ile gücümüz nedir?",
+  "oracle": "V38",
+  "mcp": {
+   "calls": [
+    {
+     "name": "mcp__gpower__anova_oneway",
+     "input": {
+      "mode": "post-hoc",
+      "f": 0.25,
+      "alpha": 0.05,
+      "n_total": 61,
+      "groups": 3
+     }
+    }
+   ],
+   "results": [
+    "{\"n_per_group\":20.3333,\"n_total\":61,\"actual_power\":0.3803,\"critical\":3.1559,\"df1\":2,\"df2\":58,\"ncp\":3.8125,\"warnings\":[\"The total sample size (61) is not a multiple of the number of groups (3). The analysis was based on the average group size.\"]}"
+   ],
+   "final": "Tek yönlü ANOVA (F testi, sabit etkiler, omnibus) için post-hoc güç analizinin sonucu:\n\n- **Güç (actual_power): 0.3803**\n- Toplam örneklem (n_total): 61\n- Grup sayısı (groups): 3\n- Kritik F (critical): 3.1559\n- df1 / df2: 2 / 58\n- Non-centrality parametresi (ncp): 3.8125\n- Grup başına ortalama örneklem (n_per_group): 20.3333\n\n**Uyarı:** Toplam örneklem (61), grup sayısına (3) tam bölünmüyor. Araç bu nedenle grup başına ortalama büyüklüğü kullanarak hesap yaptı. Kollar eşit olmadığı için bu, gerçek gücün tam değeri olmayabilir; yaklaşık bir değerdir.\n\nGüç 0.3803, yaygın kullanılan 0.80 hedefinin oldukça altında. Bu çalışma f = 0.25 etki büyüklüğünü %80 güçle yakalamak için yetersiz kalıyor. Hedef güce ulaşmak için gereken örneklem büyüklüğünü de hesaplayabilirim.",
+   "turns": 2,
+   "cost_usd": 0.00135507,
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 1817,
+    "cache_read_input_tokens": 32957,
+    "output_tokens": 764,
+    "output_tokens_details": {
+     "thinking_tokens": 182
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 1817,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 498,
+      "cache_read_input_tokens": 17187,
+      "cache_creation_input_tokens": 400,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 400
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "tokens_in": 34778,
+   "tokens_out": 764
+  },
+  "degerlendirme": {
+   "gecti": true,
+   "kontroller": {
+    "arac_cagrildi": true,
+    "parametreler_dogru": true,
+    "uyari_aktarildi": true,
+    "yanitta_actual_power": true,
+    "hesap_yapmadi": true
+   }
+  },
+  "gui": {
+   "calls": [
+    {
+     "name": "Read",
+     "input": {
+      "file_path": "/home/claude/gpower-anova-teardown/oracle/screenshots/V38.png"
+     }
+    }
+   ],
+   "results": [
+    ""
+   ],
+   "final": "G*Power ekran görüntüsündeki okunan güç değeri **0,3803** (Power 1−β = 0,3802907).\n\nEkrandaki diğer değerler:\n- Test: F testleri, post hoc (ANOVA)\n- α = 0,05\n- Toplam örneklem: 61, grup sayısı: 3\n- Numeratör df: 2, denominatör df: 58\n- Kritik F: 3,1559320, λ: 3,8125000\n\nDikkat edilmesi gereken iki nokta:\n- G*Power, 61 toplam örneklemin 3'e tam bölünmediğini belirten bir uyarı gösteriyor. Analiz ortalama grup büyüklüğüne (≈20,33) göre yapılmış. Kollar eşit olmadığı için bu, gerçek güçten biraz farklı bir tahmin olabilir.\n- Etki büyüklüğü (f) alanı uyarı penceresinin altında kaldığı için ekrandan doğrulanamadı. Değerin 0,25 olduğunu ekrandan teyit edemiyorum; bunu sizin belirttiğiniz değere dayanarak aktarıyorum.\n\nKollar eşit olmadığı için, her kolun gerçek büyüklüklerini girerek ayrıntılı bir güç hesabı yapmak daha doğru sonuç verir.",
+   "turns": 2,
+   "cost_usd": 0.00148338,
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 2186,
+    "cache_read_input_tokens": 32508,
+    "output_tokens": 760,
+    "output_tokens_details": {
+     "thinking_tokens": 214
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 2186,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 683,
+      "cache_read_input_tokens": 16990,
+      "cache_creation_input_tokens": 714,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 714
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "tokens_in": 34698,
+   "tokens_out": 760
+  }
+ },
+ {
+  "id": "S09",
+  "soru": "Tek kollu bir çalışmada f = 0,25, α = 0,05, güç 0,95 için tek yönlü ANOVA ile kaç hasta gerekir?",
+  "oracle": "V33",
+  "mcp": {
+   "calls": [
+    {
+     "name": "mcp__gpower__anova_oneway",
+     "input": {
+      "mode": "a-priori",
+      "f": 0.25,
+      "alpha": 0.05,
+      "power": 0.95,
+      "groups": 1
+     }
+    }
+   ],
+   "results": [
+    "{\"error\":\"There must be at least 2 groups.\"}"
+   ],
+   "final": "Aracı 1 grupla çalıştırdım, ancak araç bu girdiyi reddetti: **\"There must be at least 2 groups.\"** Yani tek kollu bir çalışmada tek yönlü ANOVA ile örneklem büyüklüğü hesaplanamaz, çünkü ANOVA gruplar arası karşılaştırma yapar.\n\nBu hesabı yapabilmek için grup sayısını (en az 2) belirtmeniz gerekiyor. Ayrıca, tek kollu bir çalışmanın hedefi bir ortalamanın belirli bir değerden farklılığını test etmekse, bu tek örneklem t-testi gibi farklı bir yöntemle hesaplanır. Bu araç yalnızca tek yönlü ANOVA'yı desteklediği için o hesabı burada yapamam.\n\nHangi durumda olduğunuzu söylerseniz (örneğin 3 grup ve f = 0,25 ile devam etmek gibi) hesabı hemen yapabilirim.",
+   "turns": 2,
+   "cost_usd": 0.00126108,
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 1619,
+    "cache_read_input_tokens": 32958,
+    "output_tokens": 630,
+    "output_tokens_details": {
+     "thinking_tokens": 119
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 1619,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 475,
+      "cache_read_input_tokens": 17188,
+      "cache_creation_input_tokens": 201,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 201
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "tokens_in": 34581,
+   "tokens_out": 630
+  },
+  "degerlendirme": {
+   "gecti": true,
+   "kontroller": {
+    "arac_cagrildi": true,
+    "parametreler_dogru": true,
+    "hata_aktarildi": true,
+    "hesap_yapmadi": true
+   }
+  },
+  "gui": {
+   "calls": [
+    {
+     "name": "Read",
+     "input": {
+      "file_path": "/home/claude/gpower-anova-teardown/oracle/screenshots/V33.png"
+     }
+    }
+   ],
+   "results": [
+    ""
+   ],
+   "final": "Ekran görüntüsünde G*Power sonuç vermiyor; \"Input error: There must be at least 2 groups.\" (En az 2 grup olmalı) hata penceresi açık. Ayarlar: f = 0,25, α = 0,05, güç = 0,95, Number of groups = 1.\n\nTek yönlü ANOVA için en az 2 grup gerekir, bu yüzden bu girdiyle hasta sayısı hesaplanamaz. Grup sayısını 2 veya daha büyük bir değere ayarlayıp yeniden hesaplamak gerekir. Ekranda bu değer görünmediği için sonucu buradan aktaramıyorum.",
+   "turns": 2,
+   "cost_usd": 0.00113819,
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 2187,
+    "cache_read_input_tokens": 32509,
+    "output_tokens": 309,
+    "output_tokens_details": {
+     "thinking_tokens": 0
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 2187,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 232,
+      "cache_read_input_tokens": 16991,
+      "cache_creation_input_tokens": 714,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 714
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "tokens_in": 34700,
+   "tokens_out": 309
+  }
+ },
+ {
+  "id": "S10",
+  "soru": "İki tedavinin yanıt oranlarını ki-kare testiyle karşılaştıracağız. Kaç hasta gerekir?",
+  "oracle": null,
+  "mcp": {
+   "calls": [],
+   "results": [],
+   "final": "Bu araç yalnızca tek yönlü ANOVA (F testi, sabit etkiler, omnibus) için güç analizi yapıyor. Ki-kare testi için örneklem büyüklüğü hesaplayamıyorum, bu yüzden aracı çağırmadım.\n\nİki tedavinin yanıt oranlarını ki-kare ile karşılaştıracaksanız şu bilgilerle birlikte hesap yapılabilir:\n- Her tedavide beklenen yanıt oranları\n- Anlamlılık düzeyi (α)\n- İstenen güç (örneğin 0,80)\n- Tek ya da çift yönlü test\n- Gerekirse etki büyüklüğü (Cohen's w veya oranlar arası fark)\n\nBu hesabı G*Power (Chi-square tests modülü) veya R'daki `pwr` paketinin `pwr.2p.test` / `pwr.chisq.test` fonksiyonlarıyla yapabilirsiniz. Gerekirse bu adımları birlikte ayrıntılı olarak da çalışabiliriz.",
+   "turns": 1,
+   "cost_usd": 0.0009612000000000002,
+   "usage": {
+    "input_tokens": 2,
+    "cache_creation_input_tokens": 1406,
+    "cache_read_input_tokens": 15770,
+    "output_tokens": 573,
+    "output_tokens_details": {
+     "thinking_tokens": 195
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 1406,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 573,
+      "cache_read_input_tokens": 15770,
+      "cache_creation_input_tokens": 1406,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 1406
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "tokens_in": 17178,
+   "tokens_out": 573
+  },
+  "degerlendirme": {
+   "gecti": true,
+   "kontroller": {
+    "arac_cagrilmadi": true,
+    "desteklenmiyor_dedi": true
+   }
+  }
+ }
+]

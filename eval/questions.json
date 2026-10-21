@@ -1,0 +1,148 @@
+[
+ {
+  "id": "S01",
+  "soru": "Üç farklı antihipertansif tedavi kolunu karşılaştıran bir çalışma planlıyoruz. Orta düzey etki (Cohen f = 0,25), α = 0,05 ve %95 güç istiyoruz. Toplam kaç hasta, kol başına kaç hasta gerekir?",
+  "beklenen": {
+   "mode": "a-priori",
+   "f": 0.25,
+   "alpha": 0.05,
+   "power": 0.95,
+   "groups": 3
+  },
+  "oracle": "V05",
+  "dogru": {
+   "n_total": 252,
+   "n_per_group": 84
+  }
+ },
+ {
+  "id": "S02",
+  "soru": "Dört kollu bir ağrı kesici çalışması: f = 0,25, α = 0,05, güç 0,95. Gereken toplam örneklem nedir?",
+  "beklenen": {
+   "mode": "a-priori",
+   "f": 0.25,
+   "alpha": 0.05,
+   "power": 0.95,
+   "groups": 4
+  },
+  "oracle": "V12",
+  "dogru": {
+   "n_total": 280
+  }
+ },
+ {
+  "id": "S03",
+  "soru": "Üç diyet programını karşılaştıracağız ve küçük bir etki bekliyoruz (f = 0,10). α = 0,05, güç %80 için kaç katılımcı lazım?",
+  "beklenen": {
+   "mode": "a-priori",
+   "f": 0.1,
+   "alpha": 0.05,
+   "power": 0.8,
+   "groups": 3
+  },
+  "oracle": "V01",
+  "dogru": {
+   "n_total": 969
+  }
+ },
+ {
+  "id": "S04",
+  "soru": "Üç tedavi kolunda toplam 60 hastamız var. Etki büyüklüğü f = 0,25 ve α = 0,05 ise çalışmanın gücü nedir?",
+  "beklenen": {
+   "mode": "post-hoc",
+   "f": 0.25,
+   "alpha": 0.05,
+   "n_total": 60,
+   "groups": 3
+  },
+  "oracle": "V34",
+  "dogru": {
+   "actual_power": 0.3744
+  }
+ },
+ {
+  "id": "S05",
+  "soru": "Beş farklı fizyoterapi protokolü, toplam 100 hasta. f = 0,25, α = 0,05 için elde edilen güç ne kadar?",
+  "beklenen": {
+   "mode": "post-hoc",
+   "f": 0.25,
+   "alpha": 0.05,
+   "n_total": 100,
+   "groups": 5
+  },
+  "oracle": "V44",
+  "dogru": {
+   "actual_power": 0.4663
+  }
+ },
+ {
+  "id": "S06",
+  "soru": "Üç kol, büyük etki (f = 0,40), α = 0,05, güç %80. Toplam örneklem büyüklüğü?",
+  "beklenen": {
+   "mode": "a-priori",
+   "f": 0.4,
+   "alpha": 0.05,
+   "power": 0.8,
+   "groups": 3
+  },
+  "oracle": "V03",
+  "dogru": {
+   "n_total": 66
+  }
+ },
+ {
+  "id": "S07",
+  "soru": "Etik kurul α = 0,01 istiyor. Üç kol, f = 0,25, güç 0,95 ile kaç hasta gerekir?",
+  "beklenen": {
+   "mode": "a-priori",
+   "f": 0.25,
+   "alpha": 0.01,
+   "power": 0.95,
+   "groups": 3
+  },
+  "oracle": "V08",
+  "dogru": {
+   "n_total": 336
+  }
+ },
+ {
+  "id": "S08",
+  "soru": "Üç tedavi kolunda toplam 61 hasta topladık (kollar eşit değil). f = 0,25, α = 0,05 ile gücümüz nedir?",
+  "beklenen": {
+   "mode": "post-hoc",
+   "f": 0.25,
+   "alpha": 0.05,
+   "n_total": 61,
+   "groups": 3
+  },
+  "oracle": "V38",
+  "dogru": {
+   "actual_power": 0.3803,
+   "uyari": true
+  }
+ },
+ {
+  "id": "S09",
+  "soru": "Tek kollu bir çalışmada f = 0,25, α = 0,05, güç 0,95 için tek yönlü ANOVA ile kaç hasta gerekir?",
+  "beklenen": {
+   "mode": "a-priori",
+   "f": 0.25,
+   "alpha": 0.05,
+   "power": 0.95,
+   "groups": 1
+  },
+  "oracle": "V33",
+  "dogru": {
+   "error": "There must be at least 2 groups."
+  }
+ },
+ {
+  "id": "S10",
+  "soru": "İki tedavinin yanıt oranlarını ki-kare testiyle karşılaştıracağız. Kaç hasta gerekir?",
+  "beklenen": null,
+  "oracle": null,
+  "dogru": {
+   "desteklenmiyor": true
+  }
+ }
+]

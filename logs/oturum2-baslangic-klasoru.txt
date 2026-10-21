@@ -1,0 +1,9 @@
+﻿
+Name         Length
+----         ------
+bos-mcp.json     19
+CONTRACT.md    4397
+SPEC.md       19686
+
+
+

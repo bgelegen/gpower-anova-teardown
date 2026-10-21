@@ -1,0 +1,130 @@
+{
+  "name": "anova_oneway",
+  "description": "One-way ANOVA (F test, fixed effects, omnibus) power analysis.\n\nmode: \"a-priori\" (needs f, alpha, power, groups) or \"post-hoc\"\n(needs f, alpha, n_total, groups). digits: decimals (default 4).\nReturns the same JSON object as the gpower-clone CLI, or {\"error\": ...}.\nIf the CLI would print a warning to stderr (e.g. the total sample size is\nnot a multiple of the number of groups), the warning lines are returned\nin an extra trailing \"warnings\" field so that the calling agent sees them.\n",
+  "inputSchema": {
+    "properties": {
+      "mode": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Mode"
+      },
+      "f": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "F"
+      },
+      "alpha": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Alpha"
+      },
+      "power": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Power"
+      },
+      "groups": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Groups"
+      },
+      "n_total": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "N Total"
+      },
+      "digits": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Digits"
+      }
+    },
+    "title": "anova_onewayArguments",
+    "type": "object"
+  }
+}

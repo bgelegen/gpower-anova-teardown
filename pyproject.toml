@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gpower-clone"
+version = "0.1.0"
+description = "G*Power one-way ANOVA (F test, fixed effects, omnibus) power analysis clone"
+requires-python = ">=3.10"
+dependencies = ["scipy"]
+
+[project.optional-dependencies]
+mcp = ["mcp"]
+test = ["pytest", "mcp", "mpmath"]
+
+[project.scripts]
+gpower-clone = "gpower_clone.cli:main"
+gpower-clone-mcp = "gpower_clone.mcp_server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

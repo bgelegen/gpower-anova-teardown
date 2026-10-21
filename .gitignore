@@ -1,0 +1,53 @@
+# --- Kaynak yazılım repoya ASLA girmez (etik/yasal çerçeve, yönerge madde 1) ---
+# G*Power yürütülebilirleri ve kurulum paketi
+GPower*.exe
+GPowerNT.exe
+*.exe
+GPowerWin_*.zip
+gpower/
+araclar/
+YZM301-araclar/
+
+# Decompile / tersine mühendislik ham çıktıları repoya girmez (madde 3)
+# Kanıt defterinde yalnızca davranış ve alıntı kalır, ham kod değil.
+decompile/
+ghidra_project/
+*.gzf
+*.rep
+*.asm
+*.lst
+raw-decompile/
+
+# Kurulum betikleri ve logları (ödev deposuna ait değil)
+*.bat
+*.ps1
+*.lnk
+*-ciktisi.txt
+
+# --- Çalışma zamanı ---
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+env/
+node_modules/
+*.egg-info/
+.coverage
+htmlcov/
+
+# --- Editör / OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Gizli anahtar sızıntısı koruması (API anahtarları repoya girmez)
+.env
+.env.*
+*.key
+secrets.*
+
+# yerel yapılandırma (agent_eval.py üretir)
+eval/agent-mcp.json
