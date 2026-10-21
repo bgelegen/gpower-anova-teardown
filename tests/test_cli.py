@@ -189,10 +189,13 @@ def test_fractional_groups_rounded_silently():
 
 
 def test_installed_console_scripts_exist():
-    scripts = Path(sys.executable).parent
+    # Komut dosyalarının yeri kuruluma göre değişir: sanal ortamda python ile aynı klasör,
+    # Windows'ta sanal ortamsız kurulumda <önek>\Scripts (CI matrisi yakaladı).
+    import sysconfig
+    scripts = Path(sysconfig.get_path("scripts"))
     names = ("gpower-clone", "gpower-clone-mcp")
     for n in names:
-        assert (scripts / n).exists() or (scripts / f"{n}.exe").exists(), n
+        assert (scripts / n).exists() or (scripts / f"{n}.exe").exists(), f"{n} ({scripts})"
     exe = scripts / "gpower-clone.exe"
     if exe.exists():
         proc = subprocess.run([str(exe), *cli_args(**posthoc_args())],
