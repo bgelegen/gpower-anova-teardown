@@ -22,6 +22,19 @@ soruyla aynı mı, beklenen sayı yanıtta mı, uyarı/hata Türkçe aktarıldı
 ya soruda ya araç çıktısında geçiyor mu** (ajan hesap yapmadı mı). Değerlendiricinin kendi iki
 kalıp hatası (S08, S10) bulundu ve düzeltildi → H-06; eski koşular `--regrade` ile yeniden puanlandı.
 
+## Doğru seçim oranı, süre ve doğruluk
+
+Her sorunun **beklenen test ailesi** `questions.json`'daki `aile` alanında (9 soru `anova-oneway`,
+S10 `chi2-contingency` = kapsam dışı). Soru soru tablo: **[KARSILASTIRMA.md](KARSILASTIRMA.md)**
+(`python eval/rapor.py` kayıtlardan üretir).
+
+| Koşu | Doğru seçim oranı | MCP doğruluk | GUI doğruluk | MCP ort. token / süre | GUI ort. token / süre |
+|------|:-----------------:|:------------:|:------------:|----------------------:|----------------------:|
+| v3 | **10/10** | 10/10 | 8/9 | 14 238 / 5,0 sn | 13 740 / 3,4 sn |
+| v3 tekrar | **10/10** | 9/10 | 8/9 | 14 295 / 4,6 sn | 13 745 / 3,0 sn |
+
+GUI kolunun süre ve token'ına G*Power'ı sürüp ekran görüntüsünü üretmenin bedeli dahil değildir (aşağıda).
+
 ## Token karşılaştırması: MCP ve GUI
 
 **1) Ölçülen (Claude Code `usage`, v3).** Aynı 9 soru, aynı model:

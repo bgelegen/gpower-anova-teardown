@@ -1,6 +1,7 @@
 [
  {
   "id": "S01",
+  "aile": "anova-oneway",
   "soru": "Üç farklı antihipertansif tedavi kolunu karşılaştıran bir çalışma planlıyoruz. Orta düzey etki (Cohen f = 0,25), α = 0,05 ve %95 güç istiyoruz. Toplam kaç hasta, kol başına kaç hasta gerekir?",
   "beklenen": {
    "mode": "a-priori",
@@ -17,6 +18,7 @@
  },
  {
   "id": "S02",
+  "aile": "anova-oneway",
   "soru": "Dört kollu bir ağrı kesici çalışması: f = 0,25, α = 0,05, güç 0,95. Gereken toplam örneklem nedir?",
   "beklenen": {
    "mode": "a-priori",
@@ -32,6 +34,7 @@
  },
  {
   "id": "S03",
+  "aile": "anova-oneway",
   "soru": "Üç diyet programını karşılaştıracağız ve küçük bir etki bekliyoruz (f = 0,10). α = 0,05, güç %80 için kaç katılımcı lazım?",
   "beklenen": {
    "mode": "a-priori",
@@ -47,6 +50,7 @@
  },
  {
   "id": "S04",
+  "aile": "anova-oneway",
   "soru": "Üç tedavi kolunda toplam 60 hastamız var. Etki büyüklüğü f = 0,25 ve α = 0,05 ise çalışmanın gücü nedir?",
   "beklenen": {
    "mode": "post-hoc",
@@ -62,6 +66,7 @@
  },
  {
   "id": "S05",
+  "aile": "anova-oneway",
   "soru": "Beş farklı fizyoterapi protokolü, toplam 100 hasta. f = 0,25, α = 0,05 için elde edilen güç ne kadar?",
   "beklenen": {
    "mode": "post-hoc",
@@ -77,6 +82,7 @@
  },
  {
   "id": "S06",
+  "aile": "anova-oneway",
   "soru": "Üç kol, büyük etki (f = 0,40), α = 0,05, güç %80. Toplam örneklem büyüklüğü?",
   "beklenen": {
    "mode": "a-priori",
@@ -92,6 +98,7 @@
  },
  {
   "id": "S07",
+  "aile": "anova-oneway",
   "soru": "Etik kurul α = 0,01 istiyor. Üç kol, f = 0,25, güç 0,95 ile kaç hasta gerekir?",
   "beklenen": {
    "mode": "a-priori",
@@ -107,6 +114,7 @@
  },
  {
   "id": "S08",
+  "aile": "anova-oneway",
   "soru": "Üç tedavi kolunda toplam 61 hasta topladık (kollar eşit değil). f = 0,25, α = 0,05 ile gücümüz nedir?",
   "beklenen": {
    "mode": "post-hoc",
@@ -123,6 +131,7 @@
  },
  {
   "id": "S09",
+  "aile": "anova-oneway",
   "soru": "Tek kollu bir çalışmada f = 0,25, α = 0,05, güç 0,95 için tek yönlü ANOVA ile kaç hasta gerekir?",
   "beklenen": {
    "mode": "a-priori",
@@ -138,6 +147,7 @@
  },
  {
   "id": "S10",
+  "aile": "chi2-contingency",
   "soru": "İki tedavinin yanıt oranlarını ki-kare testiyle karşılaştıracağız. Kaç hasta gerekir?",
   "beklenen": null,
   "oracle": null,

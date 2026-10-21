@@ -42,3 +42,22 @@ ayrıca ödeme yapılmadı.
 - Orkestratör ajanın (oturumları hazırlayan, oracle'ı GUI'den dolduran ve değerlendiren
   sohbet) maliyeti Claude Code dışında olduğu için ölçülemedi; GUI sürme maliyetinin
   hesaplanmış karşılığı `eval/OZET.md`'de.
+
+## Neyi farklı yapardık
+
+- **REA'yı dar açardık.** O1 devam turunun maliyetinin büyük kısmı, bağlamda biriken decompile
+  çıktılarıydı. Her alt soruyu (ör. "N yuvarlaması nerede?", "%.7f/%.7g eşiği nerede?") ayrı, kısa
+  bir REA oturumunda sorup bulguyu hemen LEDGER'a yazmak, tek uzun oturumdan ucuz olurdu.
+- **Oracle'ı sökümden önce toplardık.** GUI vektörlerinin bir kısmı söküm sırasında toplandı; elde
+  önceden olsaydı O1 "hipotez → hemen oracle'la sına" döngüsüyle daha az turda biterdi.
+- **Uç bölgeyi baştan ayrı ele alırdık.** R-18 (f ≤ 0,0002) en çok zamanı alan konu oldu ve sonunda
+  CI'de scipy sürümüne bağlı olduğu ortaya çıktı (H-09). Bu bölgeyi en başta "yüksek hassasiyetle
+  kanıtlanacak, platforma göre değişebilir" diye sözleşmeye yazmak sonraki iki düzeltmeyi önlerdi.
+- **Ajanı ilk koşudan yalıtırdık.** v1/v2'de ortamın eklediği 22 tarayıcı aracı girdi token'ını
+  ~2,5 kat şişirdi ve ondalık virgül sorununu (H-07) gizledi. `--strict-mcp-config` +
+  `--disallowedTools` en baştan konsaydı iki koşu eksik olurdu.
+- **Değerlendiriciyi önce test ederdik.** Değerlendirme kalıplarındaki iki hata (H-06) ve GUI
+  kolunda 7 basamak / 4 basamak karşılaştırması, ajanın değil ölçenin hatasıydı. Değerlendiriciye de
+  elle hazırlanmış "doğru/yanlış yanıt" örnekleriyle birim testi yazardık.
+- **Ajanı iki kez değil beş kez koşardık.** v3 ve tekrarı arasında S09 farklı çıktı (H-08); oranı
+  güvenle söylemek için koşu sayısı az. Haiku ile 10 soru ~0,015 $ olduğundan bu ucuz bir iyileştirme.

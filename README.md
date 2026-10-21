@@ -17,6 +17,16 @@ kendisi değildir, onun kodunu içermez ve onun adını taşımaz.
 
 [![Canlı demo: hesaplayıcı ve F dağılımları](docs/img/canli-demo.png)](https://bgelegen.github.io/gpower-anova-teardown/)
 
+### Yapılan katmanlar
+
+| Katman | Durum | Nerede |
+|--------|:-----:|--------|
+| Temel: söküm → SPEC + LEDGER → temiz oda CLI → diferansiyel test | ✅ | [`SPEC.md`](SPEC.md) · [`LEDGER.md`](LEDGER.md) · [`src/`](src/gpower_clone/) · [`tests/UYUM_RAPORU.md`](tests/UYUM_RAPORU.md) |
+| **+15** MCP sunucusu (`anova_oneway`, MCP = CLI) | ✅ | [MCP sunucusu](#mcp-sunucusu-15) · [`docs/mcp-schema.json`](docs/mcp-schema.json) |
+| **+10** AI ajanı (Türkçe klinik soru → MCP → Türkçe yanıt; doğru seçim oranı, MCP–GUI token/süre/doğruluk) | ✅ | [`eval/OZET.md`](eval/OZET.md) · [`eval/KARSILASTIRMA.md`](eval/KARSILASTIRMA.md) |
+| İsteğe bağlı: test ailesi sınıflandırıcısı — **Jev yerine etiket kümesi kısıtlı LLM** (TR/EN, güven < 0,75 → araştırmacıya sor, kalibrasyon) | ✅ | [`eval/jev/RAPOR.md`](eval/jev/RAPOR.md) |
+| Ek: özellik tabanlı test, mutasyon testi, CI matrisi, canlı demo, 4K videolar | ✅ | aşağıda |
+
 > **Atıf.** G*Power: Faul, F., Erdfelder, E., Lang, A.-G., & Buchner, A. (2007). G*Power 3: A
 > flexible statistical power analysis program for the social, behavioral, and biomedical
 > sciences. *Behavior Research Methods, 39*(2), 175–191. · Faul, F., Erdfelder, E., Buchner, A.,
@@ -39,7 +49,8 @@ kendisi değildir, onun kodunu içermez ve onun adını taşımaz.
 | Canlı demo | GitHub Pages + Pyodide: **depodaki motorun kendisi** tarayıcıda; 63 vektörü diferansiyel testin aynı koduyla tarayıcıda yeniden doğrular |
 | Kanıt defteri | 54 satır: **23 [REA]** (kılavuzda olmayan davranış), 6 [REA→DOK] puan dışı, 7 [DOK], 18 [ORACLE]/[AJAN] |
 | MCP (+15) | tek araç `anova_oneway`; 51 girdide MCP nesnesi = CLI JSON'u |
-| AI ajanı (+10) | 10 Türkçe klinik soru; son sürüm iki koşuda **19/20**, 20 yanıtta kaynaksız sayı yok; MCP–GUI token ölçümü |
+| AI ajanı (+10) | 10 Türkçe klinik soru; **doğru seçim oranı 20/20**, son sürüm iki koşuda **19/20** doğru, 20 yanıtta kaynaksız sayı yok; MCP–GUI token, süre, doğruluk → [`eval/KARSILASTIRMA.md`](eval/KARSILASTIRMA.md) |
+| Test ailesi sınıflandırıcısı | Jev yerine kısıtlı LLM: 48 soruda (24 TR + 24 EN) **48/48** doğru etiket, ANOVA olmayan hiçbir soru motora gitmedi, ECE 0,056 → [`eval/jev/RAPOR.md`](eval/jev/RAPOR.md) |
 | Demo | [`docs/demo-cli.mp4`](docs/demo-cli.mp4) (58 sn, CLI koşusunun ekran kaydı) |
 
 ## İncelenen sürüm (konfigürasyon yönetimi)
@@ -144,15 +155,15 @@ flowchart LR
 | [`SPEC.md`](SPEC.md) | 18 kural (R-01…R-18) + Gherkin kabul kriterleri + bilinmeyenler |
 | [`LEDGER.md`](LEDGER.md) | Kanıt defteri: iddia · REA kanıtı (fonksiyon/adres) · güven · bilinmeyen · SPEC · test |
 | [`HALLUCINATIONS.md`](HALLUCINATIONS.md) | 10 kayıt: ajanların yanlış çıkardıkları, nasıl fark edildi, hangi test yakaladı |
-| [`AGENT_COST.md`](AGENT_COST.md) | Oturum başına ölçülmüş token, süre, liste maliyeti, kota |
+| [`AGENT_COST.md`](AGENT_COST.md) | Oturum başına ölçülmüş token, süre, liste maliyeti, kota + "neyi farklı yapardık" |
 | [`MUTATION.md`](MUTATION.md) | Mutasyon testi: 26 mutant, hangi testin yakaladığı, bulunan iki test açığı |
-| [`tools/`](tools/) | `mutasyon.py` (mutasyon kampanyası), `build_site.py` (canlı demoyu üretir) |
+| [`tools/`](tools/) | `mutasyon.py` (mutasyon kampanyası), `build_site.py` (canlı demoyu üretir), `uyum_raporu.py` (uyum raporunu üretir) |
 | [`SPEC_SORULARI.md`](SPEC_SORULARI.md) | O2'nin SPEC'te belirsiz bulduğu 13 nokta ve kararları |
 | [`prompts/`](prompts/) | O1 ve O2'nin ilk prompt'ları (birebir) + O1 devam mesajı |
 | [`oracle/`](oracle/) | 63 G*Power vektörü (CSV + ekran görüntüsü), 1485 statsmodels vektörü, R-18 kanıtı |
 | [`src/gpower_clone/`](src/gpower_clone/) | `engine.py` (saf hesap) · `display.py` (G*Power gösterimi) · `contract.py` · `cli.py` · `mcp_server.py` |
-| [`tests/`](tests/) | kural testleri (her R-xx ve Gherkin senaryosu), CLI, diferansiyel, MCP=CLI, R-18 |
-| [`eval/`](eval/) | AI ajanı: 10 soru, araç çağrısı logları, sonuçlar, token karşılaştırması ([`eval/OZET.md`](eval/OZET.md)) |
+| [`tests/`](tests/) | kural testleri (her R-xx ve Gherkin senaryosu), CLI, diferansiyel, MCP=CLI, R-18 · **[`tests/UYUM_RAPORU.md`](tests/UYUM_RAPORU.md)**: diferansiyel test ve uyum raporu (vektör vektör) |
+| [`eval/`](eval/) | AI ajanı: 10 soru (beklenen test ailesiyle), araç çağrısı logları, sonuçlar, token/süre/doğruluk karşılaştırması ([`eval/OZET.md`](eval/OZET.md), [`eval/KARSILASTIRMA.md`](eval/KARSILASTIRMA.md)) · [`eval/jev/`](eval/jev/): test ailesi sınıflandırıcısı |
 | [`docs/`](docs/) | Canlı demo sitesi (GitHub Pages), videolar, terminal kaydı ve betiği, MCP şeması |
 
 ## Bulunan, kılavuzda olmayan davranışlar (öne çıkanlar)
@@ -227,8 +238,22 @@ logları ve ölçülmüş MCP/GUI token karşılaştırması: [`eval/OZET.md`](e
 | **v3** | **10/10** | Araç açıklaması: "sayıyı ondalık nokta ile gönder" — son sürüm |
 | v3 tekrar | 9/10 | Aynı ayarlar; S09'da ajan "tek kollu" çalışmada grup sayısını 2 varsaydı → H-08 |
 
-İsteğe bağlı "Jev" System-1 sınıflandırıcısı bu teslimde **yoktur**; kapsam dışı soru (S10,
-t-testi) ajanın kendisi tarafından reddedilir ve araç çağrılmaz.
+**Doğru seçim oranı ve MCP–GUI karşılaştırması** ([`eval/KARSILASTIRMA.md`](eval/KARSILASTIRMA.md)):
+her sorunun beklenen test ailesi `eval/questions.json`'da (`aile`). Ajan iki koşuda da **10/10** doğru
+aileyi seçti (ki-kare sorusu S10'da aracı çağırmadan reddetti). Aynı 9 soruda MCP yolu 10/10 ve 9/10,
+hazır ekran görüntüsünü okuyan GUI yolu 8/9 doğru; GUI'nin hatası grup başı n'in G*Power ekranında
+yazmaması. Ortalama süre MCP 5,0 / 4,6 sn, GUI 3,4 / 3,0 sn (GUI'ye ekran görüntüsünü üretme bedeli dahil değil).
+
+### Test ailesi sınıflandırıcısı (Jev yerine LLM)
+
+Yönergedeki isteğe bağlı System-1 sınıflandırıcısı **Jev ile değil, etiket kümesi kısıtlı bir LLM ile**
+yapıldı (Claude Haiku, araçsız): soruyu `t2-indep`, `t-paired`, `anova-oneway`, `chi2-contingency`,
+`multireg-r2`, `ambiguous`, `unsupported` etiketlerinden birine ve bir güven değerine eşler; **sayı üretmez**.
+Güven < 0,75 ya da `ambiguous`/`unsupported` → araştırmacıya sorulur. 24 Türkçe soru ve İngilizce
+çevirileri (her aileden tuzaklı örnekler, 4 bilerek belirsiz) üzerinde: 48/48 doğru etiket, belirsiz 8
+sorunun 8'inde araştırmacıya soruldu, ANOVA olmayan 40 sorunun hiçbiri motora gitmedi, Türkçe ve İngilizce
+arasında fark yok, beklenen kalibrasyon hatası 0,056 (model biraz az güvenli). Set küçük ve etiketleri biz
+yazdık; sınırlılıklar raporda → [`eval/jev/RAPOR.md`](eval/jev/RAPOR.md).
 
 ## Demo
 
