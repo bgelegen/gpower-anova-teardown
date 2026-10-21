@@ -85,8 +85,9 @@ async function boot() {
 function readForm() {
   const fd = new FormData($('#form'));
   const mode = fd.get('mode');
-  const p = { mode, f: fd.get('f'), alpha: fd.get('alpha'), groups: fd.get('groups') };
+  const p = { mode, f: fd.get('f'), alpha: fd.get('alpha') };
   if (mode === 'a-priori') p.power = fd.get('power'); else p.total_n = fd.get('total_n');
+  p.groups = fd.get('groups');
   for (const k of Object.keys(p)) if (k !== 'mode') p[k] = String(p[k]).replace(',', '.');
   return p;
 }

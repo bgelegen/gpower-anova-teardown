@@ -96,3 +96,14 @@ klinik soru yanıtlayan ajan (Haiku).
 | Nasıl fark edildi | `parametreler_dogru: False`, `hata_aktarildi: False` (aynı soru v3'te geçmişti → kararsızlık). |
 | Yakalayan | `eval/agent_eval.py` · `eval/v3-tekrar/RESULTS.md` |
 | Düzeltme | Düzeltilmedi; dürüst sonuç olarak bırakıldı: son sürüm 2 koşuda 19/20. Ders: küçük model "yardımcı olmak için" eksik bilgiyi tamamlıyor; aracın kendisi reddettiği sürece yanlış **hesap** üretmiyor ama yanlış **soruyu** yanıtlayabiliyor. Olası iyileştirme: aracın `groups` için ayrı bir "kullanıcı belirtmedi" durumu istemesi. |
+
+## H-09 · "Motor her durumda doğru" — tek ortamdan genelleme (ORK)
+
+| Alan | |
+|------|---|
+| Oturum | ORK — `oracle/R18_YUKSEK_HASSASIYET.md`, README, canlı demo metni |
+| Ajanın iddiası | "Motor her durumda hedefi sağlayan en küçük 3'ün katını veriyor; uç küçük f'de yanlış olan G*Power." |
+| Gerçek davranış | İddia yalnızca ölçüldüğü ortamda (Python 3.13 · scipy 1.18.1 · Linux) doğru. Python 3.10 · scipy 1.15.3'te motor V52'de 6 hasta fazla, V55'te hedefin altında N veriyor; yani df2 ≈ 10⁹ bölgesinde motor da G*Power gibi çift duyarlığın gürültüsüne düşüyor. G*Power'ın minimum olmadığı iddiası ise her ortamda doğru kaldı. |
+| Nasıl fark edildi | GitHub Actions matrisi (Linux/Windows × Python 3.10/3.13): 4 işten 3'ü `test_R18_engine_n_is_minimal_multiple[V52]`'de kırıldı; aynı test Python 3.10 ile yerelde yeniden üretildi. |
+| Yakalayan | `.github/workflows/test.yml` · `tests/test_r18_high_precision.py` |
+| Düzeltme | Test ikiye ayrıldı: df2 ≲ 2,4·10⁸ (V51, V53, V54) her platformda katı; V52/V55 yalnızca ölçülüyor (`xfail`, katı değil, sebep scipy sürümüyle yazılıyor). R-18 belgesine ortam tablosu eklendi, README ve site metni "scipy 1.18 ile" diye düzeltildi. Ders: tek makinede geçen sayısal bir iddia, ortam değişince çürüyebilir; CI matrisi bunun için var. |

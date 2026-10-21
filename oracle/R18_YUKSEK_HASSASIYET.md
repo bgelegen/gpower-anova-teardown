@@ -21,8 +21,24 @@ ağırlıklı düzenlenmiş tamamlanmamış beta toplamıdır. Kod:
 
 **Sonuç.** df2 ≈ 2·10⁸'e kadar (V51, V53) G*Power ile motor birebir aynı. Daha
 büyük df2'de G*Power'ın merkezi olmayan F hesabı kayıyor: V54'te gösterilen N
-hedef gücü **sağlamıyor**, V52/V55'te gereğinden büyük. Motor her durumda hedefi
-sağlayan en küçük 3'ün katını veriyor. Bu vektörler diferansiyel testte
+hedef gücü **sağlamıyor**, V52/V55'te gereğinden büyük. Tablodaki "Motor N" sütunu
+**scipy 1.18.1 / Linux** ile hesaplandı ve orada beş vektörün hepsinde doğru minimumdur.
+
+**Sınırlama (CI'nin bulduğu, H-09).** Bu bölgede çift duyarlıklı her hesap gürültülüdür;
+motorun sonucu da kütüphane sürümüne ve platforma bağlıdır:
+
+| Ortam | V51 | V53 | V54 | V52 | V55 |
+|-------|-----|-----|-----|-----|-----|
+| Python 3.13 · scipy 1.18.1 · Linux | minimum | minimum | minimum | minimum | minimum |
+| Python 3.10 · scipy 1.15.3 · Linux | minimum | minimum | minimum | **+6 fazla** (963 468 897) | **hedefin altında** (3 853 875 447) |
+
+Bu yüzden testler iki katmanlıdır: V51/V53/V54 (df2 ≲ 2,4·10⁸) her platformda **katı**
+denetlenir; V52/V55'te motorun sonucu yalnızca ölçülür (`xfail`, katı değil). G*Power'ın
+bu vektörlerde minimum olmadığı ise platformdan bağımsız, her yerde katı denetlenir.
+Klinik anlamı yok (f = 0,0001 ile 10⁹ hasta); ders anlamı var: **çalışma ortamı da kara
+kutunun parçasıdır** (Sommerville 7.3, host-target geliştirme).
+
+G*Power ile karşılaştırmada bu vektörler diferansiyel testte
 `xfail(strict=True)` ile "bilinen sayısal sapma" olarak işaretlidir; N eşleşme
 oranı hesabında ayrıca raporlanır (README).
 

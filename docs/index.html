@@ -108,10 +108,11 @@
   <div class="section-head">
     <h2>G*Power nerede yanılıyor</h2>
     <p>Çok küçük etkilerde (payda serbestlik derecesi 2·10⁸'i geçince) iki program ayrışıyor. Kimin doğru olduğunu ikisinden de bağımsız, 40 basamak hassasiyetle hesaplanan güç gösteriyor: hedef güç 0,80'e ulaşan en küçük 3'ün katını motor buluyor, G*Power bulamıyor.</p>
+    <p>Bir dürüstlük notu: motorun bu bölgedeki başarısı da ortama bağlı. scipy 1.18'de beşinde de doğru; eski scipy 1.15'te V52'de 6 hasta fazla veriyor. Bunu tek makinede değil, Windows ve Linux üzerinde dört farklı Python ile koşan CI matrisi yakaladı.</p>
   </div>
   <div class="table-wrap">
     <table class="r18">
-      <thead><tr><th>Vektör</th><th>f</th><th>G*Power N</th><th>En küçük doğru N</th><th>Fark</th><th>G*Power'ın N'inde gerçek güç</th></tr></thead>
+      <thead><tr><th>Vektör</th><th>f</th><th>G*Power N</th><th>En küçük doğru N (= motor, scipy 1.18)</th><th>Fark</th><th>G*Power'ın N'inde gerçek güç</th></tr></thead>
       <tbody>
         <tr><td>V51</td><td>0,001</td><td>9 634 692</td><td>9 634 692</td><td class="same">aynı</td><td>0,800000006</td></tr>
         <tr><td>V53</td><td>0,0005</td><td>38 538 759</td><td>38 538 759</td><td class="same">aynı</td><td>0,800000006</td></tr>
