@@ -22,4 +22,17 @@ jobs:
       - name: CLI duman testi
         run: gpower-clone --test anova-oneway --mode a-priori --f 0.25 --alpha 0.05 --power 0.95 --groups 3
       - name: Tüm testler (oracle, özellik, MCP = CLI, R-18)
-        run: python -m pytest -q
+        shell: bash
+        run: |
+          set -o pipefail
+          python -c "import platform, scipy; print(platform.platform(), 'Python', platform.python_version(), 'scipy', scipy.__version__)" | tee pytest.log
+          python -m pytest -q -rfEx --tb=short 2>&1 | tee -a pytest.log
+      - name: Özet
+        if: always()
+        shell: bash
+        run: |
+          echo '### ${{ matrix.os }} · Python ${{ matrix.python }}' >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          head -1 pytest.log >> "$GITHUB_STEP_SUMMARY"
+          grep -E "^(FAILED|ERROR|XFAIL)|passed|failed" pytest.log | tail -25 >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
