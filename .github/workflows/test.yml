@@ -36,3 +36,6 @@ jobs:
           head -1 pytest.log >> "$GITHUB_STEP_SUMMARY"
           grep -E "^(FAILED|ERROR|XFAIL)|passed|failed" pytest.log | tail -25 >> "$GITHUB_STEP_SUMMARY"
           echo '```' >> "$GITHUB_STEP_SUMMARY"
+          echo "::notice title=ortam::$(head -1 pytest.log)"
+          grep -E "^(FAILED|ERROR)" pytest.log | head -10 | while IFS= read -r l; do echo "::error title=pytest::$l"; done
+          grep -E "^E  " pytest.log | head -6 | while IFS= read -r l; do echo "::warning title=ayrıntı::$l"; done
